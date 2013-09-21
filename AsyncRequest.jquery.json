@@ -3,9 +3,10 @@
     "title": "jQuery AsyncRequest",
     "description": "jQuery plugin for color manipulation and animation support.",
     "keywords": [
-        "AsyncRequest",
-        "JGrowl",
-		"BlokUI"
+        "AsyncRequest",        
+		"BlokUI",
+		"JGrowl",
+		"Notify"
     ],
     "version": "0.2.3",
     "author": {
@@ -28,8 +29,8 @@
     "bugs": "https://github.com/Taguiar84/AsyncRequest/issues",
     "homepage": "https://github.com/Taguiar84/AsyncRequest",
     "docs": "https://github.com/Taguiar84/AsyncRequest/issues",
-    "download": "http://code.jquery.com/#color",
+    "download": "https://github.com/Taguiar84/AsyncRequest/tree/master/Version/latest/AsyncRequest.zip",
     "dependencies": {
-        "jquery": ">=1.5"
+        "jquery": ">=2.0"
     }
 }
