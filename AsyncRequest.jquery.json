@@ -1,10 +1,10 @@
 {
     "name": "AsyncRequest",
     "title": "jQuery AsyncRequest",
-    "description": "jQuery plugin for color manipulation and animation support.",
+    "description": "jQuery plugin for make request with visual feedback, like blocked element, notify result, yet make queue and parallel queue for you requests.",
     "keywords": [
         "AsyncRequest",        
-		"BlokUI",
+		"BlockUI",
 		"JGrowl",
 		"Notify"
     ],
@@ -32,5 +32,6 @@
     "download": "https://github.com/Taguiar84/AsyncRequest/tree/master/Version/latest/AsyncRequest.zip",
     "dependencies": {
         "jquery": ">=2.0"
+        "BlockUI": ">=2.5"
     }
 }

@@ -9,185 +9,64 @@
 */
 
 (function ($) {
+    "use strict";
 
-    $.fn.asyncRequest = new function () {
-        var Module = {
-
-            init: function (options) {
-                var defaults = {};
-                $.extend(true, defaults, $.asyncRequest.defaults);
-                this.options = $.extend(true, defaults, options);
-                if (this.options.notification.notifyFunction == null)
-                    this.options.notification.notifyFunction = this.NotifyDefault;
-            },
-
-            getAsync: function (url, data, containner, successFunction, erroFunction, msg, queue) {
-                var object = getObjAsync()
-                object.Url = url;
-                object.Data = data;
-                object.SuccessFunction = successFunction;
-                object.ErroFunction = erroFunction;
-                object.Msg = msg;
-                object.Queue = queue;
-                get(object);
-            },
-
-            get: function (asyncObject) {
-                if (this.options == null)
-                    this.init();
-                var options = this.options;
-                //group function to use queueKey
-                var func = function () {
-                    ConfigurarAntesRequest(options, asyncObject, "GET");
-                    ConfigRequest("GET", asyncObject);
+    function ExecuteNotify(data, options, requestType, eventType) {
+        if (options.notification.notifyFunction !== null) {
+            options.notification.notifyCommandType.forEach(function (elem) {
+                if (elem == requestType) {
+                    options.notification.notifyFunction(eventType, data);
                 }
-                this.ExecuteFunction(asyncObject, func);
-            },
-
-            post: function (asyncObject) {
-                if (this.options == null)
-                    this.init();
-                var options = this.options;
-                var func = function () {
-                    ConfigurarAntesRequest(options, asyncObject, "POST");
-                    ConfigRequest("POST", asyncObject);
-                }
-                this.ExecuteFunction(asyncObject, func);
-            },
-
-            update: function (asyncObject) {
-                if (this.options == null)
-                    this.init();
-                var options = this.options;
-                var func = function () {
-                    ConfigurarAntesRequest(options, asyncObject, "UPDATE");
-                    ConfigRequest("UPDATE", asyncObject);
-                }
-                this.ExecuteFunction(asyncObject, func);
-            },
-
-            delete: function (asyncObject) {
-                if (this.options == null)
-                    this.init();
-                var options = this.options;
-                var func = function () {
-                    ConfigurarAntesRequest(options, asyncObject);
-                    ConfigRequest("DELETE", asyncObject);
-                }
-                this.ExecuteFunction(asyncObject, func);
-            },
-
-            getObjAsync: function () {
-                if (this.options == null)
-                    this.init();
-                return Object.create(this.options.asyncObject);
-            },
-
-            getAjax: function () {
-                if (this.options == null)
-                    this.init();
-                return this.options.ajax;
-            },
-
-            ExecuteFunction: function (asyncObject, func) {
-
-                var queueUtil = $.asyncRequest.defaults.queueUtil;
-                var key = queueUtil.configQueue(asyncObject);//key in queue to execute;
-
-                if (key != null) {//Put in Queue
-                    var Objqueue = queueUtil.getQueue(key);
-                    Objqueue.queue.push(function () {
-                        func();
-                    });
-                    if (!Objqueue.Executing) {
-                        Objqueue.Executing = true;
-                        Objqueue.queue.execute();
-                    }
-                }//No Queue, execute!!
-                else
-                    func();
-            },
-
-            NotifyDefault: function (type, data) {
-                var notification = null;
-                var msg, stack, sticky;
-                if ($.jGrowl != null) {
-                    notification = new asyncRequest_Notification_JGrowl(this);
-                }
-                else if ($.noty != null) {
-                    notification = new asyncRequest_Notification_Notfy(this);
-                }
-
-                switch (type) {
-                    case "success":
-                        notification.successNotify();
-                        break;
-                    case "erro":
-
-                        try{
-                            var jsonErro = JSON.parse(data.responseText);
-                            msg = jsonErro.errorMessage;
-                            stack = jsonErro.ExceptionMessage + "<br/>" + jsonErro.StackTrace;
-                        }
-                        catch (exception) {//Erro not JSON, but has value
-                            if (data.responseText != null && data.responseText != "")
-                                msg = data.responseText;
-                            else {
-                                msg = data.Message == null ? data.statusText : data.Message;
-                            }
-                        }                        
-                        notification.erroNotify(msg, stack, true);
-                        break;
-                    case "info":
-                        notification.notifyInfo();
-                        break;
-                }
-
-            }
-
+            });
         }
-        return Module
     }
-
-
 
     function ConfigurarAntesRequest(options, asyncObject, requestType) {
 
-        if (asyncObject.Msg == null || asyncObject.Msg == undefined)
+        if (asyncObject.Msg === null || asyncObject.Msg === undefined) {
             asyncObject.Msg = $.tmpl(options.loadTextTemplate, { msg: options.loadText });
-        if (asyncObject.Containner != false) {
-            if (asyncObject.Containner == null) //BlockPage
+        }
+        if (asyncObject.Containner !== false) {
+            if (asyncObject.Containner === null) {//BlockPage
                 $.blockUI({ message: asyncObject.Msg });
-            else
+            }
+            else {
                 $(asyncObject.Containner).block({ message: asyncObject.Msg });
+            }
         }
 
-        if (asyncObject.Data == null)
+        if (asyncObject.Data === null) {
             asyncObject.DataRequest = {};
+        }
         else {
-            if (asyncObject.contentType = "application/json")
+            if (asyncObject.contentType == "application/json") {
                 asyncObject.DataRequest = JSON.stringify(asyncObject.Data);
+            }
             asyncObject.DataRequest = asyncObject.Data;
         }
 
 
-        if (asyncObject.SuccessFunction == null)
+        if (asyncObject.SuccessFunction === null) {
             asyncObject.SuccessFunction = function (data) { };
-        if (asyncObject.ErroFunction == null)
+        }
+        if (asyncObject.ErroFunction === null) {
             asyncObject.ErroFunction = function (data) { };
-        if (asyncObject.CompleteFunction == null)
+        }
+        if (asyncObject.CompleteFunction == null) {
             asyncObject.CompleteFunction = function (data) { };
-
+        }
         if (asyncObject.SuccessFunction != false) {
             var func = asyncObject.SuccessFunction;
             asyncObject.SuccessFunction = function (data) {
                 //ExecuteDynamicCommand();
 
                 if (asyncObject.containner != false) {
-                    if (asyncObject.Containner == null) //BlockPage
+                    if (asyncObject.Containner == null) { //BlockPage
                         $.unblockUI();
-                    else
+                    }
+                    else {
                         $(asyncObject.Containner).unblock();
+                    }
                 }
                 func(data);
                 ExecuteNotify(data, options, requestType, 'success');
@@ -226,10 +105,12 @@
                 //        break
                 //}
                 if (asyncObject.Containner != false) {
-                    if (asyncObject.Containner == null) //BlockPage
+                    if (asyncObject.Containner == null) { //BlockPage
                         $.unblockUI();
-                    else
+                    }
+                    else {
                         $(asyncObject.Containner).unblock();
+                    }
                 }
                 funcErro(data);
                 ExecuteNotify(data, options, requestType, 'erro');
@@ -242,7 +123,7 @@
             var funcComplete = asyncObject.CompleteFunction;
             asyncObject.CompleteFunction = function (data) {
                 funcComplete(data);
-            }
+            };
         }
     }
 
@@ -258,14 +139,154 @@
         });
     }
 
-    function ExecuteNotify(data, options, requestType, eventType) {
-        if (options.notification.notifyFunction != null) {
-            options.notification.notifyCommandType.forEach(function (elem) {
-                if (elem == requestType)
-                    options.notification.notifyFunction(eventType, data);
-            })
+    $.fn.asyncRequest = new function () {
+        var Module = {
+
+            init: function (options) {
+                var defaults = {};
+                $.extend(true, defaults, $.asyncRequest.defaults);
+                this.options = $.extend(true, defaults, options);
+                if (this.options.notification.notifyFunction === null) {
+                    this.options.notification.notifyFunction = this.NotifyDefault;
+                }
+            },
+
+            getObjAsync: function () {
+                if (this.options === undefined) {
+                    this.init();
+                }
+                return Object.create(this.options.asyncObject);
+            },
+
+            getAsync: function (url, data, containner, successFunction, erroFunction, msg, queue) {
+                var object = this.getObjAsync();
+                object.Url = url;
+                object.Data = data;
+                object.SuccessFunction = successFunction;
+                object.ErroFunction = erroFunction;
+                object.Msg = msg;
+                object.Queue = queue;
+                object.Containner = containner;
+                this.get(object);
+            },
+
+            get: function (asyncObject) {
+                if (this.options === undefined) {
+                    this.init();
+                }
+                var options = this.options;
+                //group function to use queueKey
+                var func = function () {
+                    ConfigurarAntesRequest(options, asyncObject, "GET");
+                    ConfigRequest("GET", asyncObject);
+                };
+                this.ExecuteFunction(asyncObject, func);
+            },
+
+            post: function (asyncObject) {
+                if (this.options === undefined) {
+                    this.init();
+                }
+                var options = this.options;
+                var func = function () {
+                    ConfigurarAntesRequest(options, asyncObject, "POST");
+                    ConfigRequest("POST", asyncObject);
+                };
+                this.ExecuteFunction(asyncObject, func);
+            },
+
+            update: function (asyncObject) {
+                if (this.options === undefined) {
+                    this.init();
+                }
+                var options = this.options;
+                var func = function () {
+                    ConfigurarAntesRequest(options, asyncObject, "UPDATE");
+                    ConfigRequest("UPDATE", asyncObject);
+                };
+                this.ExecuteFunction(asyncObject, func);
+            },
+
+            delete: function (asyncObject) {
+                if (this.options === undefined) {
+                    this.init();
+                }
+                var options = this.options;
+                var func = function () {
+                    ConfigurarAntesRequest(options, asyncObject);
+                    ConfigRequest("DELETE", asyncObject);
+                };
+                this.ExecuteFunction(asyncObject, func);
+            },
+
+            getAjax: function () {
+                if (this.options === undefined) {
+                    this.init();
+                }
+                return this.options.ajax;
+            },
+
+            ExecuteFunction: function (asyncObject, func) {
+
+                var queueUtil = $.asyncRequest.defaults.queueUtil;
+                var key = queueUtil.configQueue(asyncObject);//key in queue to execute;
+
+                if (key != null) {//Put in Queue
+                    var Objqueue = queueUtil.getQueue(key);
+                    Objqueue.queue.push(function () {
+                        func();
+                    });
+                    if (!Objqueue.Executing) {
+                        Objqueue.Executing = true;
+                        Objqueue.queue.execute();
+                    }
+                }//No Queue, execute!!
+                else
+                    func();
+            },
+
+            NotifyDefault: function (type, data) {
+                var notification = null;
+                var msg, stack, sticky;
+                if ($.jGrowl != null) {
+                    notification = new asyncRequest_Notification_JGrowl(this);
+                }
+                else if ($.noty != null) {
+                    notification = new asyncRequest_Notification_Notfy(this);
+                }
+
+                switch (type) {
+                    case "success":
+                        notification.successNotify();
+                        break;
+                    case "erro":
+
+                        try {
+                            var jsonErro = JSON.parse(data.responseText);
+                            msg = jsonErro.errorMessage;
+                            stack = jsonErro.ExceptionMessage + "<br/>" + jsonErro.StackTrace;
+                        }
+                        catch (exception) {//Erro not JSON, but has value
+                            if (data.responseText != null && data.responseText != "")
+                                msg = data.responseText;
+                            else {
+                                msg = data.Message == null ? data.statusText : data.Message;
+                            }
+                        }
+                        notification.erroNotify(msg, stack, true);
+                        break;
+                    case "info":
+                        notification.notifyInfo();
+                        break;
+                }
+
+            }
+
         }
+        return Module
     }
+
+    
 
     $.asyncRequest = $.fn.asyncRequest;
 
