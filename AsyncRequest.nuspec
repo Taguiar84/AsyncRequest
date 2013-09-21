@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>AsyncRequest</id>
+        <version>0.0.2.5</version>
+        <title>Async Request Helper</title>
+        <authors>Thiago Aguiar</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Faciltador de request com block de tela (blockUI) e feedback de resiultado (jGrow)</description>
+        <summary>Faciltador de request com block de tela (blockUI) e feedback de resiultado (jGrow)</summary>
+        <dependencies>
+            <dependency id="jQuery" version="2.0.3" />
+            <dependency id="jQuery.Templates" version="0.1" />
+            <dependency id="jQuery.BlockUI" version="2.65" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="Content\AsyncRequest.css" target="content\Content\AsyncRequest.css" />
+        <file src="Scripts\AsyncRequest.js" target="content\Scripts\AsyncRequest.js" />
+        <file src="Scripts\AsyncRequest.Notification.js" target="content\Scripts\AsyncRequest.Notification.js" />
+        <file src="Scripts\AsyncRequest.Queue.js" target="content\Scripts\AsyncRequest.Queue.js" />
+    </files>
+</package>
