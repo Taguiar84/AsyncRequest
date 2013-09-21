@@ -14,7 +14,7 @@
 
     successNotify = function (msg, stack, sticky) {
         if (msg == null)
-            msg = $('<div/>').text(options.notificationSuccessMsgDefault).html();
+            msg = options.notificationSuccessMsgDefault;
         var temp = replaceTemplate(options.notifyTemplate, msg, options.fullErroText, stack);
         //var temp = $.tmpl(options.notifyTemplate, { fullErroText: options.fullErroText, msg: msg, msgStack: stack });
         $.jGrowl($(temp).html(), { theme: 'success', sticky: sticky });
@@ -22,7 +22,7 @@
 
     erroNotify = function (msg, stack, sticky, exception) {
         if (msg == null)
-            msg = $('<div/>').text(options.notificationErrorMsgDefault).html();            
+            msg = options.notificationErrorMsgDefault;
         if (stack == null && exception != null)
             stack = exception.stack;
         var temp = replaceTemplate(options.notifyTemplateErro, msg, options.fullErroText, stack);

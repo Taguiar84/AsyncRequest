@@ -1,4 +1,4 @@
-/// <reference path="AsyncRequest.Object.js" />
+ï»¿/// <reference path="AsyncRequest.Object.js" />
 /// <reference path="AsyncRequest.Queue.js" />
 /// <reference path="AsyncRequest.Notification.js" />
 /// <reference path="jquery.jgrowl.min.js" />
@@ -315,8 +315,8 @@
             notifyCommandType: ['POST', 'UPDATE', 'DELETE'],
             notifyTemplate: "<div><div class='notificationTemplate'><p></p><p class='notificationTemplateMsg'>${msg}</p></div></div>",
             notifyTemplateErro: "<div><div class='notificationTemplate'><p></p><p class='notificationTemplateMsg'>${msg}</p><br/><ul class='msgStack'><li><a onclick=\"$(this).parent().parent().find('li:last').toggle();\">${fullErroText}</a></li><li>${msgStack}</li></ul></div></div>",
-            notificationSuccessMsgDefault: 'Operação realizada com sucesso',
-            notificationErrorMsgDefault: 'Ocorreu um erro ao realizar a operação',
+            notificationSuccessMsgDefault: 'OperaÃ§Ã£o realizada com sucesso',
+            notificationErrorMsgDefault: 'Ocorreu um erro ao realizar a operaÃ§Ã£o',
             fullErroText: 'Erro Completo'
         }
     }
