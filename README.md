@@ -23,11 +23,12 @@ Please read the [issue guidelines](https://github.com/Taguiar84/AsyncRequest/tre
 
 ### Mandatory requirements
 * [jQuery](http://jquery.com/) v. 2.0+
-* [jQuery Template] (No link is beta and dont code more, I will change to another way)
+* [BlockUI](http://www.malsup.com/jquery/block/) v. 2.62+
 
 
 ### Optional requirements
-* [JavaScript Templates engine](https://github.com/blueimp/JavaScript-Templates) v. 2.3.1+
+* [Jgrowl](https://github.com/stanlemon/jGrowl) v. 1.2.7
+* [Noty](http://needim.github.io/noty/)
 
 The JavaScript Templates engine is used to render the selected and uploaded files for the Basic Plus UI and jQuery UI versions.
 
