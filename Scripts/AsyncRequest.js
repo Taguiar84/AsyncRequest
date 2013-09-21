@@ -24,7 +24,7 @@
     function ConfigurarAntesRequest(options, asyncObject, requestType) {
 
         if (asyncObject.Msg === null || asyncObject.Msg === undefined) {
-            asyncObject.Msg = $.tmpl(options.loadTextTemplate, { msg: options.loadText });
+            asyncObject.Msg =   options.loadTextTemplate.replace("${msg}",options.loadText);
         }
         if (asyncObject.Containner !== false) {
             if (asyncObject.Containner === null) {//BlockPage

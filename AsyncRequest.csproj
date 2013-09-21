@@ -150,7 +150,6 @@
     <Content Include="Scripts\jquery.blockUI.min.js" />
     <Content Include="Scripts\jquery.jgrowl.min.js" />
     <Content Include="Scripts\jQuery.tmpl.js" />
-    <Content Include="Scripts\jQuery.tmpl.min.js" />
     <Content Include="Scripts\knockout-2.3.0.debug.js" />
     <Content Include="Scripts\knockout-2.3.0.js" />
     <Content Include="Scripts\qunit-1.11.0.js" />
