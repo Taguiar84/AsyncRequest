@@ -6,8 +6,7 @@ AsyncRequest
 jQuery plugin for make request with visual feedback, like blocked element, notify result, yet make queue and parallel queue for you requests.
 
 ## Setup
-* [How to setup the plugin on your website](https://github.com/blueimp/jQuery-File-Upload/wiki/Setup)
-* [How to use only the basic plugin (minimal setup guide).](https://github.com/blueimp/jQuery-File-Upload/wiki/Basic-plugin)
+* [How to setup the plugin on your website](https://github.com/Taguiar84/AsyncRequest/wiki/Setup)
 
 ## Support
 
@@ -18,4 +17,30 @@ If your question is not directly related to the File Upload plugin, you might ha
 
 * Bugs and Feature requests  
 **Bugs** and **Feature requests** can be reported using the [issues tracker](https://github.com/Taguiar84/AsyncRequest/issues).  
-Please read the [issue guidelines](https://github.com/blueimp/jQuery-File-Upload/blob/master/CONTRIBUTING.md) before posting.
+Please read the [issue guidelines](https://github.com/Taguiar84/AsyncRequest/tree/master/CONTRIBUTING.md) before posting.
+
+
+
+## Requirements
+
+### Mandatory requirements
+* [jQuery](http://jquery.com/) v. 2.0+
+
+
+
+### Optional requirements
+* [JavaScript Templates engine](https://github.com/blueimp/JavaScript-Templates) v. 2.3.1+
+
+The JavaScript Templates engine is used to render the selected and uploaded files for the Basic Plus UI and jQuery UI versions.
+
+## License
+Released under the [MIT license](http://www.opensource.org/licenses/MIT).
+
+
+## Donations
+jQuery AsyncRequest is free software, but you can donate to support the developer, Thiago Aguiar:
+
+PayPal: [![PayPal](https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PQW4J6XGV92LG)
+
+
+
