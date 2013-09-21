@@ -3,6 +3,10 @@
 /// <reference path="AsyncRequest.Notification.js" />
 /// <reference path="jquery.jgrowl.min.js" />
 /// 
+/*!
+ * Copyright 2005, 2013 jQuery Foundation, Inc. and other contributors
+ * Released under the MIT license
+*/
 
 (function ($) {
 
