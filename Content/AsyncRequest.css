@@ -1,0 +1,69 @@
+﻿.MenssagemLoad {
+    background-image: url(Images/Icones/carregandoMSG.gif);
+    background-repeat: no-repeat;
+    background-position: 10px 4px;
+    padding-top: 1px;
+    height: 40px;
+    width: 300px;
+}
+
+/*CSS button Jgrowl*/
+
+
+div.jGrowl-close, div.jGrowl-message{
+    color: black;
+}
+
+div.jGrowl div.jGrowl-message{
+	
+    padding-left: 8px;
+    margin-left:-8px;
+
+}
+
+div.jGrowl div.success, div.jGrowl div.erro, div.jGrowl div.info{
+    background: #fff;
+    border-width: 1px 1px;
+    border-color: #bbb;
+    border-style: solid;
+    border-radius:0px;
+    border-left-width: 8px;
+}
+
+div.jGrowl div.success {
+    border-color: Green;
+}
+
+div.jGrowl div.success div.jGrowl-message
+{
+	
+}
+
+div.jGrowl div.erro {
+	border-color: Red;
+}
+
+div.jGrowl div.erro .msgStack {
+    list-style:none;
+    padding-left: 0px
+}
+
+div.jGrowl div.erro .msgStack li:nth-child(2) {
+    display:none;
+}
+
+div.jGrowl div.erro div.jGrowl-message{
+}
+
+div.jGrowl div.info {
+	border-color: Blue;
+
+}
+
+div.jGrowl div.info div.jGrowl-message{
+}
+
+
+
+
+/*CSS button Notify*/
