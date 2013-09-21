@@ -25,7 +25,7 @@ Please read the [issue guidelines](https://github.com/Taguiar84/AsyncRequest/tre
 
 ### Mandatory requirements
 * [jQuery](http://jquery.com/) v. 2.0+
-
+* [jQuery Template] (No link is beta and dont code more, ae change to another way)
 
 
 ### Optional requirements
@@ -40,7 +40,7 @@ Released under the [MIT license](http://www.opensource.org/licenses/MIT).
 ## Donations
 jQuery AsyncRequest is free software, but you can donate to support the developer, Thiago Aguiar:
 
-PayPal: [![PayPal](https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PQW4J6XGV92LG)
+PayPal: [![PayPal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PQW4J6XGV92LG)
 
 
 
