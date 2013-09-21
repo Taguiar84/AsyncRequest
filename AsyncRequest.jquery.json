@@ -8,7 +8,7 @@
 		"JGrowl",
 		"Notify"
     ],
-    "version": "0.2.3",
+    "version": "0.2.5
     "author": {
         "name": "Thiago Aguiar",
         "url": "https://github.com/Taguiar84/AsyncRequest/AUTHORS.txt"

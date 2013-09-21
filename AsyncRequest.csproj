@@ -137,6 +137,7 @@
     <Content Include="Scripts\AsyncRequest.Notification.js" />
     <Content Include="AsyncRequest.jquery.json" />
     <Content Include="README.md" />
+    <Content Include="CONTRIBUTING.md" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Index.html" />
     <Content Include="Scripts\AsyncRequest.js" />

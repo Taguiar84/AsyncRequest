@@ -48,7 +48,10 @@ describe("Verifica notify - Jgrowl", function () {
         waits(1000);
         runs(function () {
             var valor = $(".notificationTemplateMsg:first").text();
-            expect(valor).toBe(request.options.notification.notificationSuccessMsgDefault);
+            //enconde html 
+            var expected = $('<div/>').text(request.options.notification.notificationSuccessMsgDefault).html();
+            expect(valor).toBe(expected);
+            
         });
     });
 
@@ -161,7 +164,7 @@ describe("Verifica notify Erro JSON - Jgrowl", function () {
         waits(1000);
         runs(function () {            
             valor = $(".msgStack li:last").text(); //Stack
-            expect(valor).toBe('Exception Message<br/>stack trace');
+            expect(valor).toBe('Exception Messagestack trace');
         });
     });
 });
