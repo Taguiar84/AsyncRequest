@@ -1,13 +1,15 @@
 # AsyncRequest
 
 ## Basic usages
-	// Sample 1
+
+	### // Sample 1
 	var successFunction = function(data){
 		alert('success function!');
 	};
 	$.asyncRequest.getAsync("www.URL.com", null, false, successFunction);
 	//OR
 	$.asyncRequest.getAsync("www.URL.com", null, false, function(data){ });	
+
 	// Sample 2
 	var objRequest = $.getObjAsync();
 	objRequest.Url= "ww.URL.com";
