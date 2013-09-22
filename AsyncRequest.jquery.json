@@ -8,7 +8,7 @@
 		"JGrowl",
 		"Notify"
     ],
-    "version": "0.2.5
+    "version": "0.2.5",
     "author": {
         "name": "Thiago Aguiar",
         "url": "https://github.com/Taguiar84/AsyncRequest/AUTHORS.txt"
@@ -31,7 +31,7 @@
     "docs": "https://github.com/Taguiar84/AsyncRequest/issues",
     "download": "https://github.com/Taguiar84/AsyncRequest/tree/master/Version/latest/AsyncRequest.zip",
     "dependencies": {
-        "jquery": ">=2.0"
+        "jquery": ">=2.0",
         "BlockUI": ">=2.5"
     }
 }
