@@ -13,7 +13,6 @@
         if (msg == null)
             msg = options.notificationSuccessMsgDefault;
         var temp = replaceTemplate(options.notifyTemplate, msg, options.fullErroText, stack);
-        //var temp = $.tmpl(options.notifyTemplate, { fullErroText: options.fullErroText, msg: msg, msgStack: stack });
         $.jGrowl($(temp).html(), { theme: 'success', sticky: sticky });
     }
 
