@@ -25,12 +25,12 @@
 
 
 ## Configuration ObjRequest [$.getObjAsync()]
-| Property          |  Default                             |  Description                                               |
-|------------------|--------------------------------------|------------------------------------------------------------|
-|Url				|null									| Url to request											|
-|Data				|null (optional)						|Jvascript object send to request							|
-|SuccesFunction		|null (optional)						|Function called after success response						|
-|ErroFunction		|null (optiona)							|Function called after erro reponse							|
-|Containner			|null (optional)						|Html element to block, null = Block page, false = desable	|
-|Msg				|null (optional)						|Mensagem used in Blocked element, Default 
-see [Defaults loadText]|
+| Property          |  Default                             |  Description														|
+|------------------|--------------------------------------|------------------------------------------------------------------|
+|Url				|null									| Url to request													|
+|Data				|null (optional)						|Jvascript object send to request									|
+|SuccesFunction		|null (optional)						|Function called after success response								|
+|ErroFunction		|null (optional)						|Function called after erro reponse									|
+|CompleteFunction	|null (optional)						|Function called when finseshed request, success or erro			|
+|Containner			|null (optional)						|Html element to block, null = Block page, false = desable			|
+|Msg				|null (optional)						|Mensagem used in Blocked element, Default see [Defaults loadText]	|
