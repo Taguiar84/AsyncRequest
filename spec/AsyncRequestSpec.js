@@ -55,6 +55,14 @@ describe("AsyncRequest Request", function () {
         });
     });
 
+    it("Use GetAsync request, no object", function () {
+        var callback = jasmine.createSpy();
+        var callbackErro = jasmine.createSpy();
+        request.getAsync("www.URL.com", [], null, callback, callbackErro);
+        expect(callback).toHaveBeenCalledWith("Happy Face");
+        expect(callbackErro).toHaveBeenCalledWith("Sad Face");
+    });
+
     it("Fazendo um request com sucesso", function () {
         var callback = jasmine.createSpy();
         //objRequest.SuccessFunction = function (data) {
