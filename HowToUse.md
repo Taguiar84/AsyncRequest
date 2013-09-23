@@ -28,22 +28,22 @@
 ### Configuration Request [$.asyncRequest]
 | Property          |  Default											|  Description														|
 |------------------|--------------------------------------------------|------------------------------------------------------------------|
-|loadText			|"Carregando.." (Loading in portugues)				|Display Mensage while request										|
+|loadText			|"Carregando.." (Loading in portugues)				|Display Mensage while request	is made								|
 |loadTextTemplate	|[See in code, very big to write here]	|template used with blockUI									|
 
 ### Configuration ObjRequest [$.getObjAsync]
 | Property          |  Default                             |  Description														|
 |------------------|--------------------------------------|------------------------------------------------------------------|
 |Url				|null									|Url to request														|
-|Data				|null (optional)						|Javascript object send to request									|
+|Data				|null (optional)						|Object javascript sent to Async Request							|
 |SuccesFunction		|null (optional)						|Function called after success response								|
-|ErroFunction		|null (optional)						|Function called after erro reponse									|
-|CompleteFunction	|null (optional)						|Function called when finseshed request, success or erro			|
-|Containner			|null (optional)						|Html element to block, null = Block page, false = desable			|
-|Msg				|null (optional)						|Mensagem used in Blocked element, Default see [Defaults loadText]	|
+|ErroFunction		|null (optional)						|Function called after error response								|
+|CompleteFunction	|null (optional)						|Function called when finished request with success or error		|
+|Containner			|null (optional)						|Html element to block, null = Block of page, false = disable		|
+|Msg				|null (optional)						|Mensagem used in Blocked element, see [Defaults loadText]	|
 |Queue				|null (optiona)							|All request with same queue(Key) will executed one after another	|
-|ContentType		|"application/json"						|Define data type of send Data, see Data property					|
-|ReturnContentType	|"application/json"						|Define data type of return Data									|
+|ContentType		|"application/json"						|Define type for send Data, see Data property						|
+|ReturnContentType	|"application/json"						|Define type for return data										|
 
 
 ## Anothers setups, used with Default Options Jquery 
@@ -56,13 +56,13 @@
 
 | Property          |  Default												|  Description														|
 |------------------|------------------------------------------------------|-----------------------------------------------------------------		|
-|notifyFunction					|null (optional)							|function base to notify about request, null= used defaut values and templates, false = desable	|
-|notifyCommandType				|['POST', 'UPDATE', 'DELETE']				|Request type with notify, only get don't show notify by default	|
-|notifyTemplate					|[See in code, very big to write here]		|Template used in default notify, with DEFAULT notifyFunction		|
-|notifyTemplateErro				|[See in code, very big to write here]		|Template used in default notify, with DEFAULT notifyFunction		|
-|notificationSuccessMsgDefault	|'Operação realizada com sucesso'			|Text template used in default notify, with DEFAULT notifyFunction			|
-|notificationErrorMsgDefault	|'Ocorreu um erro ao realizar a operação'	|Text template used in default notify, with DEFAULT notifyFunction	|
-|fullErroText					|'Erro Completo'							|Text used to show Full erro in notify, with DEFAULT notifucation	|
+|notifyFunction					|null (optional)							|function of base to notify about request, null = use default values and templates, false = disable	|
+|notifyCommandType				|['POST', 'UPDATE', 'DELETE']				|type of request with  notification, only [GET] don't show notification by default	|
+|notifyTemplate					|[See in code, very big to write here]		|Template used in default notify, used with DEFAULT notifyFunction		|
+|notifyTemplateErro				|[See in code, very big to write here]		|Template used in default notify, used with DEFAULT notifyFunction		|
+|notificationSuccessMsgDefault	|'Operação realizada com sucesso'			|Text template used in default notify, used with DEFAULT notifyFunction			|
+|notificationErrorMsgDefault	|'Ocorreu um erro ao realizar a operação'	|Text template used in default notify, used with DEFAULT notifyFunction	|
+|fullErroText					|'Erro Completo'							|Text used to show Full error in notify, used with DEFAULT notification	|
 
 
 ### All defaults to sample
