@@ -65,7 +65,7 @@
 |fullErroText					|'Erro Completo'							|Text used to show Full error in notify, used with DEFAULT notification	|
 
 
-### All defaults to sample
+### All defaults like sample
 
 
 	// Sample
