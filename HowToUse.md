@@ -29,7 +29,7 @@
 | Property          |  Default											|  Description														|
 |------------------|--------------------------------------------------|------------------------------------------------------------------|
 |loadText			|"Carregando.." (Loading in portugues)				|Display Mensage while request										|
-|loadTextTemplate	|"<div class='MenssagemLoad'><h4>${msg}</h4></div>"	|template used with blockUI									|
+|loadTextTemplate	|[See in code, very big to write here]	|template used with blockUI									|
 
 ### Configuration ObjRequest [$.getObjAsync]
 | Property          |  Default                             |  Description														|
@@ -51,6 +51,7 @@
 	You can change this values with default options [$.asyncRequest.defaults]
 
 
+
 ### Notification Options
 
 | Property          |  Default												|  Description														|
@@ -63,3 +64,37 @@
 |notificationErrorMsgDefault	|'Ocorreu um erro ao realizar a operação'	|Text template used in default notify, with DEFAULT notifyFunction	|
 |fullErroText					|'Erro Completo'							|Text used to show Full erro in notify, with DEFAULT notifucation	|
 
+
+### All defaults to sample
+
+
+	// Sample
+	$.asyncRequest.defaults = {
+        ajax: $.ajax,
+        loadText: "Carregando..",
+        loadTextTemplate: [HTML TEMPLATE],
+        queueUtil: new asyncRequest_Queue(),
+        asyncObject: {
+            Url: null,
+            Data: null,
+            //DataRequest: null, //Never use this field
+            Cache: false,
+            Containner: null,
+            Msg: null,
+            Queue: null,
+            ContentType: "application/json",
+            ReturnContentType: "application/json",
+            //function
+            SuccessFunction: null,
+            ErroFunction: null,
+            CompleteFunction: null
+        },
+        notification: {
+            notifyFunction: null,
+            notifyCommandType: ['POST', 'UPDATE', 'DELETE'],
+            notifyTemplate: [HTML TEMPLATE],
+            notifyTemplateErro: [HTML TEMPLATE],
+            notificationSuccessMsgDefault: 'Operação realizada com sucesso',
+            notificationErrorMsgDefault: 'Ocorreu um erro ao realizar a operação',
+            fullErroText: 'Erro Completo'
+        }
