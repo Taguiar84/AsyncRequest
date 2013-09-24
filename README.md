@@ -9,7 +9,7 @@ jQuery plugin for make request with visual feedback, like blocked element, notif
 * [How to setup the plugin on your website](https://github.com/Taguiar84/AsyncRequest/wiki/Setup)
 
 ## How to Use
-* [How to use the plugin on you website]()
+* [How to use the plugin on you website](https://github.com/Taguiar84/AsyncRequest/blob/master/HowToUse.md)
 
 ## Support
 
