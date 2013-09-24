@@ -49,8 +49,8 @@
         if (asyncObject.SuccessFunction === null) {
             asyncObject.SuccessFunction = function (data) { };
         }
-        if (asyncObject.ErroFunction === null) {
-            asyncObject.ErroFunction = function (data) { };
+        if (asyncObject.ErrorFunction === null) {
+            asyncObject.ErrorFunction = function (data) { };
         }
         if (asyncObject.CompleteFunction == null) {
             asyncObject.CompleteFunction = function (data) { };
@@ -74,9 +74,9 @@
             }
         }
 
-        if (asyncObject.ErroFunction != false) {
-            var funcErro = asyncObject.ErroFunction;
-            asyncObject.ErroFunction = function (data) {
+        if (asyncObject.ErrorFunction != false) {
+            var funcErro = asyncObject.ErrorFunction;
+            asyncObject.ErrorFunction = function (data) {
 
                 //if (asyncObject.ReturnType == "json") {
                 //    if (data.responseText != null && data.responseText != "") {
@@ -100,7 +100,7 @@
                 //        break;
                 //    case 400: //BadRequest
                 //    default:
-                //        asyncObject.ErroFunction(data);
+                //        asyncObject.ErrorFunction(data);
                 //        ExecuteDynamicCommand();
                 //        break
                 //}
@@ -134,7 +134,7 @@
             data: asyncObject.DataRequest,
             contentType: asyncObject.ContentType,
             success: asyncObject.SuccessFunction,
-            error: asyncObject.ErroFunction,
+            error: asyncObject.ErrorFunction,
             complete: asyncObject.CompleteFunction
         });
     }
@@ -158,12 +158,12 @@
                 return Object.create(this.options.asyncObject);
             },
 
-            getAsync: function (url, data, containner, successFunction, erroFunction, msg, queue) {
+            getAsync: function (url, data, containner, successFunction, ErrorFunction, msg, queue) {
                 var object = this.getObjAsync();
                 object.Url = url;
                 object.Data = data;
                 object.SuccessFunction = successFunction;
-                object.ErroFunction = erroFunction;
+                object.ErrorFunction = ErrorFunction;
                 object.Msg = msg;
                 object.Queue = queue;
                 object.Containner = containner;
@@ -307,7 +307,7 @@
             ReturnContentType: "application/json",
             //function
             SuccessFunction: null,
-            ErroFunction: null,
+            ErrorFunction: null,
             CompleteFunction: null
         },
         notification: {
