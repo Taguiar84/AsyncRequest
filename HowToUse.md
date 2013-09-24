@@ -37,7 +37,7 @@
 |Url				|null									|Url to request														|
 |Data				|null (optional)						|Object javascript sent to Async Request							|
 |SuccesFunction		|null (optional)						|Function called after success response								|
-|ErroFunction		|null (optional)						|Function called after error response								|
+|ErrorFunction		|null (optional)						|Function called after error response								|
 |CompleteFunction	|null (optional)						|Function called when finished request with success or error		|
 |Containner			|null (optional)						|Html element to block, null = Block of page, false = disable		|
 |Msg				|null (optional)						|Mensagem used in Blocked element, see [Defaults loadText]	|
@@ -86,7 +86,7 @@
             ReturnContentType: "application/json",
             //function
             SuccessFunction: null,
-            ErroFunction: null,
+            ErrorFunction: null,
             CompleteFunction: null
         },
         notification: {
