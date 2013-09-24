@@ -4,7 +4,7 @@
 /// <reference path="jquery.jgrowl.min.js" />
 /// 
 /*!
- * Copyright 2005, 2013 jQuery Foundation, Inc. and other contributors
+ * Copyright 2013 Poligono Software, Inc. and other contributors
  * Released under the MIT license
 */
 
@@ -39,10 +39,11 @@
             asyncObject.DataRequest = {};
         }
         else {
-            if (asyncObject.contentType == "application/json") {
-                asyncObject.DataRequest = JSON.stringify(asyncObject.Data);
+            if (asyncObject.ContentType.indexOf("application/json") != -1) {
+                asyncObject.DataRequest = JSON.stringify(asyncObject.Data);                
             }
-            asyncObject.DataRequest = asyncObject.Data;
+            else
+                asyncObject.DataRequest = asyncObject.Data;
         }
 
 
@@ -135,7 +136,8 @@
             contentType: asyncObject.ContentType,
             success: asyncObject.SuccessFunction,
             error: asyncObject.ErrorFunction,
-            complete: asyncObject.CompleteFunction
+            complete: asyncObject.CompleteFunction,
+            dataType: asyncObject.DataType
         });
     }
 
@@ -303,8 +305,8 @@
             Containner: null,
             Msg: null,
             Queue: null,
-            ContentType: "application/json",
-            ReturnContentType: "application/json",
+            ContentType: "application/json; charset=utf-8",
+            DataType: "json",
             //function
             SuccessFunction: null,
             ErrorFunction: null,
