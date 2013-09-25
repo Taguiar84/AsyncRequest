@@ -42,8 +42,8 @@
 |Containner			|null (optional)						|Html element to block, null = Block of page, false = disable		|
 |Msg				|null (optional)						|Mensagem used in Blocked element, see [Defaults loadText]	|
 |Queue				|null (optiona)							|All request with same queue(Key) will executed one after another	|
-|ContentType		|"application/json"						|Define type for send Data, see Data property						|
-|ReturnContentType	|"application/json"						|Define type for return data										|
+|ContentType		|"application/json; charset=utf-8"		|Define type for send Data, see Data property						|
+|DataType			|"json"									|Define type for return data										|
 
 
 ## Anothers setups, used with Default Options Jquery 
@@ -82,8 +82,8 @@
             Containner: null,
             Msg: null,
             Queue: null,
-            ContentType: "application/json",
-            ReturnContentType: "application/json",
+            ContentType: "application/json; charset=utf-8",
+            DataType: "json",
             //function
             SuccessFunction: null,
             ErrorFunction: null,
