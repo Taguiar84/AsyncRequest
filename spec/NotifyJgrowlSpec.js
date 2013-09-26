@@ -68,6 +68,19 @@ describe("Verifica notify - Jgrowl", function () {
         });
     });
 
+    it("desabilita o notify", function () {
+        runs(function () {
+            request.init({ notification: { notifyFunction: false } });
+            request.post(objRequest);
+        });
+        waits(1000);
+        runs(function () {
+            var valor = $(".notificationTemplateMsg").length;
+            expect(valor).toBe(0);
+        });
+    });
+
+
     it("personalizando MSG de sucesso e erro", function () {
         var msg = "Custom Mensage";
         var msgErro = msg + " erro";

@@ -14,7 +14,7 @@
     function ExecuteNotify(data, options, requestType, eventType) {
         if (options.notification.notifyFunction !== null) {
             options.notification.notifyCommandType.forEach(function (elem) {
-                if (elem == requestType) {
+                if (elem == requestType && options.notification.notifyFunction != false) {
                     options.notification.notifyFunction(eventType, data);
                 }
             });
