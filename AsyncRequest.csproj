@@ -176,6 +176,7 @@
     <Content Include="Scripts\sinon-server-1.7.3.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="spec\AsyncRequestSpec.js" />
+    <Content Include="spec\NotifyNotySpec.js" />
     <Content Include="spec\NotifyJgrowlSpec.js" />
     <Content Include="spec\QueueSpec.js" />
     <Content Include="spec\VisualSpec.js" />

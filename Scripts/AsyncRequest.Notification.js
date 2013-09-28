@@ -38,27 +38,45 @@
 
 }
 
-asyncRequest_Notification_Notfy = function () {
+asyncRequest_Notification_Notfy = function (options) {
+
+    this.options = options;
+
+    function replaceTemplate(template, msg, fullErroText, stack) {
+        template = template.replace("${fullErroText}", fullErroText);
+        template = template.replace("${msg}", msg);
+        template = template.replace("${msgStack}", stack);
+        return template;
+    }
 
     successNotify = function (msg, stack, sticky) {
         if (msg == null)
-            msg = _notificationSuccessMsgDefault;
-        var temp = $.tmpl(notificationTemplate, { msg: msg, msgStack: stack });
-        $.jGrowl($(temp[0]).html(), { theme: 'sucesso', sticky: sticky });
+            msg = options.notificationSuccessMsgDefault;
+        var temp = replaceTemplate(options.notifyTemplate, msg, options.fullErroText, stack);
+        var timeout = sticky == true ? false : 5000;
+        var n = noty({
+            layout: 'topRight', type: 'success'
+            , template: temp
+            , timeout: timeout
+        });
     }
 
     erroNotify = function (msg, stack, sticky, exception) {
         if (msg == null)
-            msg = _notificationErrorMsgDefault;
+            msg = options.notificationErrorMsgDefault;
         if (stack == null && exception != null)
             stack = exception.stack;
-        var temp = $.tmpl(notificationTemplate, { msg: msg, msgStack: stack });
-        $.jGrowl($(temp[0]).html(), { theme: 'erro', sticky: sticky });
+        var temp = replaceTemplate(options.notifyTemplateErro, msg, options.fullErroText, stack);
+        var timeout = sticky == true ? false : 5000;
+        var n = noty({
+            layout: 'topRight', type: 'error'
+            , template: temp
+            , timeout: timeout
+        });
     }
 
     notifyInfo = function (msg, stack, sticky) {
-        var temp = $.tmpl(notificationTemplate, { msg: msg, msgStack: stack });
-        $.jGrowl($(temp[0]).html(), { theme: 'aviso', sticky: sticky });
+            
     }
 
     return {
@@ -66,4 +84,5 @@ asyncRequest_Notification_Notfy = function () {
         erroNotify: erroNotify,
         notifyInfo: notifyInfo
     }
+
 }
