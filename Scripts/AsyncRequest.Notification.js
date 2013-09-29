@@ -56,7 +56,8 @@ asyncRequest_Notification_Notfy = function (options) {
         var timeout = sticky == true ? false : 5000;
         var n = noty({
             layout: 'topRight', type: 'success'
-            , template: temp
+            , text: msg
+            //, template: temp
             , timeout: timeout
         });
     }
@@ -70,13 +71,22 @@ asyncRequest_Notification_Notfy = function (options) {
         var timeout = sticky == true ? false : 5000;
         var n = noty({
             layout: 'topRight', type: 'error'
-            , template: temp
+            , text: msg
+            //, template: temp
             , timeout: timeout
         });
     }
 
     notifyInfo = function (msg, stack, sticky) {
-            
+        var timeout = sticky == true ? false : 5000;
+        var n = noty({
+            layout: 'topRight', type: 'information'
+            , text: msg
+            //, template: temp
+            , timeout: timeout
+        });
+        var temp = replaceTemplate(options.notifyTemplate, msg, options.fullErroText, stack);
+        $.jGrowl($(temp).html(), { theme: 'info', sticky: sticky });
     }
 
     return {

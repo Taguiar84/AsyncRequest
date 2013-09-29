@@ -25,8 +25,7 @@ describe("Verifica notify - Noty", function () {
     });
 
     afterEach(function () {
-        $('.jGrowl-notification').trigger('jGrowl.close');//Remove ALL, now CALL erroFunction too
-        //$('.jGrowl-notification:last').trigger('jGrowl.close');//Remove last
+        $.noty.closeAll();        
     });
 
     it("chamada basica", function () {
@@ -36,8 +35,12 @@ describe("Verifica notify - Noty", function () {
         waits(1000);
 
         runs(function () {
-            var valor = $(".notificationTemplateMsg:first").text();
-            expect(valor).toBe("");
+            var valor = $(".noty_text:first").text();
+            expect(valor).toBe(request.options.notification.notificationSuccessMsgDefault);
+
+            var valor = $(".noty_text:last").text();
+            expect(valor).toBe(request.options.notification.notificationErrorMsgDefault);
+
         });
 
     });
