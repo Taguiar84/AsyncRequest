@@ -23,6 +23,38 @@
 	objRequest.Data = myDataObj
 	$.asyncRequest.post(objRequest);
 
+## Advanced use
+
+	### Diff request options
+
+	//
+	request = Object.create($.asyncRequest); //Copy request functions    
+	request.init({ asyncObject: {Cache: true, DataType: 'html'} }); // "request" will make cache and datatype is html
+	var objRequest = request.getObjAsync(); create object request //Objrequest use Cache and DataType is html
+
+	var anotherObjRequest = $.asyncRequest.getObjAsync(); // Use dafault options no Cache and Datype is json
+
+	request.init( {notification: {notifyFunction: false} } ); //Now disable notifycation
+
+	$.asyncRequest.post(objRequest); //Cache true, DataType html but Notification is enable
+
+
+	### Use Queue
+
+	//
+	var objRequest = $.asyncRequest.getObjAsync();
+	objRequest.Url = "url to request";
+	.
+	.  Another configs to obj
+	.
+	objRequest.Queue = "myKey";
+	$.asyncRequest.get(objRequest); //Long request
+	
+	objRequest.Data = {xyz}; //Config to new request
+	objRequest.Queue = "myKey";//SAME KEY
+	$.asyncRequest.[post,get,put,delete](objRequest);//This request only will do after first request finished
+
+
 ## Options to use
 
 ### Configuration Request [$.asyncRequest]
