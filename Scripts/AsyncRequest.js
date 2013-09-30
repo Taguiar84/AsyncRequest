@@ -14,7 +14,7 @@
     function ExecuteNotify(data, options, requestType, eventType) {
         if (options.notification.notifyFunction !== null) {
             options.notification.notifyCommandType.forEach(function (elem) {
-                if (elem == requestType && options.notification.notifyFunction != false) {
+                if (elem === requestType && options.notification.notifyFunction !== false) {
                     options.notification.notifyFunction(eventType, data);
                 }
             });
@@ -24,58 +24,43 @@
     function ConfigurarAntesRequest(options, asyncObject, requestType) {
 
         if (asyncObject.Msg === null || asyncObject.Msg === undefined) {
-            asyncObject.Msg =   options.loadTextTemplate.replace("${msg}",options.loadText);
+            asyncObject.Msg = options.loadTextTemplate.replace("${msg}", options.loadText);
         }
         if (asyncObject.Containner !== false) {
             if (asyncObject.Containner === null) {//BlockPage
                 $.blockUI({ message: asyncObject.Msg });
-            }
-            else {
+            } else {
                 $(asyncObject.Containner).block({ message: asyncObject.Msg });
             }
         }
 
         if (asyncObject.Data === null) {
             asyncObject.DataRequest = {};
-        }
-        else {
-            if (asyncObject.ContentType.indexOf("application/json") != -1) {
-                asyncObject.DataRequest = JSON.stringify(asyncObject.Data);                
-            }
-            else
+        } else {
+            if (asyncObject.ContentType.indexOf("application/json") !== -1) {
+                asyncObject.DataRequest = JSON.stringify(asyncObject.Data);
+            } else {
                 asyncObject.DataRequest = asyncObject.Data;
+            }
         }
-
-
-        if (asyncObject.SuccessFunction === null) {
-            asyncObject.SuccessFunction = function (data) { };
-        }
-        if (asyncObject.ErrorFunction === null) {
-            asyncObject.ErrorFunction = function (data) { };
-        }
-        if (asyncObject.CompleteFunction == null) {
-            asyncObject.CompleteFunction = function (data) { };
-        }
-        if (asyncObject.SuccessFunction != false) {
+        if (asyncObject.SuccessFunction !== false) {
             var func = asyncObject.SuccessFunction;
             asyncObject.SuccessFunction = function (data) {
-                //ExecuteDynamicCommand();
-
-                if (asyncObject.containner != false) {
-                    if (asyncObject.Containner == null) { //BlockPage
+                if (asyncObject.containner !== false) {
+                    if (asyncObject.Containner === null) { //BlockPage
                         $.unblockUI();
-                    }
-                    else {
+                    } else {
                         $(asyncObject.Containner).unblock();
                     }
                 }
-                func(data);
+                if (func !== null) {
+                    func(data);
+                }
                 ExecuteNotify(data, options, requestType, 'success');
-
-            }
+            };
         }
 
-        if (asyncObject.ErrorFunction != false) {
+        if (asyncObject.ErrorFunction !== false) {
             var funcErro = asyncObject.ErrorFunction;
             asyncObject.ErrorFunction = function (data) {
 
@@ -105,25 +90,28 @@
                 //        ExecuteDynamicCommand();
                 //        break
                 //}
-                if (asyncObject.Containner != false) {
-                    if (asyncObject.Containner == null) { //BlockPage
+                if (asyncObject.Containner !== false) {
+                    if (asyncObject.Containner === null) { //BlockPage
                         $.unblockUI();
-                    }
-                    else {
+                    } else {
                         $(asyncObject.Containner).unblock();
                     }
                 }
-                funcErro(data);
+                if (funcErro !== null) {
+                    funcErro(data);
+                }
                 ExecuteNotify(data, options, requestType, 'erro');
 
             };
         }
 
         //Sem utilidade ainda
-        if (asyncObject.CompleteFunction != false) {
+        if (asyncObject.CompleteFunction !== false) {
             var funcComplete = asyncObject.CompleteFunction;
             asyncObject.CompleteFunction = function (data) {
-                funcComplete(data);
+                if (funcComplete !== null) {
+                    funcComplete(data);
+                }
             };
         }
     }
@@ -176,9 +164,8 @@
                 if (this.options === undefined) {
                     this.init();
                 }
-                var options = this.options;
-                //group function to use queueKey
-                var func = function () {
+                var options = this.options,
+                func = function () {//group function to use queueKey
                     ConfigurarAntesRequest(options, asyncObject, "GET");
                     ConfigRequest("GET", asyncObject);
                 };
@@ -189,8 +176,8 @@
                 if (this.options === undefined) {
                     this.init();
                 }
-                var options = this.options;
-                var func = function () {
+                var options = this.options,
+                func = function () {
                     ConfigurarAntesRequest(options, asyncObject, "POST");
                     ConfigRequest("POST", asyncObject);
                 };
@@ -209,12 +196,12 @@
                 this.ExecuteFunction(asyncObject, func);
             },
 
-            delete: function (asyncObject) {
+            'delete': function (asyncObject) {
                 if (this.options === undefined) {
                     this.init();
                 }
-                var options = this.options;
-                var func = function () {
+                var options = this.options,
+                func = function () {
                     ConfigurarAntesRequest(options, asyncObject);
                     ConfigRequest("DELETE", asyncObject);
                 };
@@ -230,10 +217,10 @@
 
             ExecuteFunction: function (asyncObject, func) {
 
-                var queueUtil = $.asyncRequest.defaults.queueUtil;
-                var key = queueUtil.configQueue(asyncObject);//key in queue to execute;
+                var queueUtil = $.asyncRequest.defaults.queueUtil,
+                key = queueUtil.configQueue(asyncObject);//key in queue to execute;
 
-                if (key != null) {//Put in Queue
+                if (key !== null) {//Put in Queue
                     var Objqueue = queueUtil.getQueue(key);
                     Objqueue.queue.push(function () {
                         func();
@@ -242,18 +229,17 @@
                         Objqueue.Executing = true;
                         Objqueue.queue.execute();
                     }
-                }//No Queue, execute!!
-                else
+                } else { //No Queue, execute!!
                     func();
+                }
             },
 
             NotifyDefault: function (type, data) {
-                var notification = null;
-                var msg, stack, sticky;
-                if ($.jGrowl != null) {
+                var notification = null,
+                msg, stack;
+                if ($.jGrowl !== null) {
                     notification = new asyncRequest_Notification_JGrowl(this);
-                }
-                else if ($.noty != null) {
+                } else if ($.noty !== null) {
                     notification = new asyncRequest_Notification_Notfy(this);
                 }
 
@@ -262,17 +248,15 @@
                         notification.successNotify();
                         break;
                     case "erro":
-
                         try {
                             var jsonErro = JSON.parse(data.responseText);
                             msg = jsonErro.errorMessage;
                             stack = jsonErro.ExceptionMessage + "<br/>" + jsonErro.StackTrace;
-                        }
-                        catch (exception) {//Erro not JSON, but has value
-                            if (data.responseText != null && data.responseText != "")
+                        } catch (exception) {//Erro not JSON, but has value
+                            if (data.responseText !== null && data.responseText !== "") {
                                 msg = data.responseText;
-                            else {
-                                msg = data.Message == null ? data.statusText : data.Message;
+                            } else {
+                                msg = data.Message === null ? data.statusText : data.Message;
                             }
                         }
                         notification.erroNotify(msg, stack, true);
@@ -281,14 +265,10 @@
                         notification.notifyInfo();
                         break;
                 }
-
             }
-
-        }
-        return Module
-    }
-
-    
+        };
+        return Module;
+    };
 
     $.asyncRequest = $.fn.asyncRequest;
 
@@ -321,6 +301,6 @@
             notificationErrorMsgDefault: 'Ocorreu um erro ao realizar a operação',
             fullErroText: 'Erro Completo'
         }
-    }
+    };
 
 })(jQuery);
