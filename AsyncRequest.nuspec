@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>AsyncRequest</id>
-        <version>0.2.5</version>
+        <version>0.3.0</version>
         <title>Async Request Helper</title>
         <authors>Thiago Aguiar</authors>
         <owners>Thiago Aguiar</owners>
@@ -17,6 +17,7 @@
         </dependencies>
     </metadata>
     <files>
+        <file src="Content\AsyncRequest-loading.gif" target="content\Content\AsyncRequest-loading.gif" />
         <file src="Content\AsyncRequest.css" target="content\Content\AsyncRequest.css" />
         <file src="Scripts\AsyncRequest.js" target="content\Scripts\AsyncRequest.js" />
         <file src="Scripts\AsyncRequest.Notification.js" target="content\Scripts\AsyncRequest.Notification.js" />
