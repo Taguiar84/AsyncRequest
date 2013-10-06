@@ -21,6 +21,17 @@
         }
     }
 
+    function Unblock(containner, funcBefore) {//moment is "before" / "after"
+
+        if (containner !== false) {
+            if (containner === null) { //BlockPage
+                $.unblockUI({ onUnblock: funcBefore });
+            } else {
+                $(containner).unblock({ onUnblock: funcBefore });
+            }
+        }
+    }
+
     function ConfigurarAntesRequest(options, asyncObject, requestType) {
 
         if (asyncObject.Msg === null || asyncObject.Msg === undefined) {
@@ -46,16 +57,38 @@
         if (asyncObject.SuccessFunction !== false) {
             var func = asyncObject.SuccessFunction;
             asyncObject.SuccessFunction = function (data) {
-                if (asyncObject.containner !== false) {
-                    if (asyncObject.Containner === null) { //BlockPage
-                        $.unblockUI();
-                    } else {
-                        $(asyncObject.Containner).unblock();
+
+                if (asyncObject.UnblockMoment === "before") {
+                    var funcBefore = null;
+                    if (func != null) {
+                        funcBefore = function () {
+                            func(data);
+                        }
+                    }                        
+                    Unblock(asyncObject.Containner, funcBefore);
+                    
+                }
+                else {
+                    if (func != null) {
+                        func(data);
                     }
+                    Unblock(asyncObject.Containner);
                 }
-                if (func !== null) {
-                    func(data);
-                }
+                
+                //if (func !== null) {
+                ////    func(data);
+
+                //    var funcInterval = function () {
+                        
+                //    };
+                //    setTimeout(funcInterval, 0.1);//runs in another thread, dont wair command in Mocktest
+                //}
+                //var funcUnblockAfter = function () {
+                //    Unblock(asyncObject.UnblockMoment, "after", asyncObject.Containner);
+                //}
+                //setTimeout(funcUnblockAfter, 0.1);
+
+
                 ExecuteNotify(data, options, requestType, 'success');
             };
         }
@@ -90,16 +123,11 @@
                 //        ExecuteDynamicCommand();
                 //        break
                 //}
-                if (asyncObject.Containner !== false) {
-                    if (asyncObject.Containner === null) { //BlockPage
-                        $.unblockUI();
-                    } else {
-                        $(asyncObject.Containner).unblock();
-                    }
-                }
+                Unblock(asyncObject.UnblockMoment, "before", asyncObject.Containner);
                 if (funcErro !== null) {
                     funcErro(data);
                 }
+                Unblock(asyncObject.UnblockMoment, "after", asyncObject.Containner);
                 ExecuteNotify(data, options, requestType, 'erro');
 
             };
@@ -287,6 +315,7 @@
             Queue: null,
             ContentType: "application/json; charset=utf-8",
             DataType: "json",
+            UnblockMoment: "after",
             //function
             SuccessFunction: null,
             ErrorFunction: null,
