@@ -76,6 +76,7 @@
 |Queue				|null (optiona)							|All request with same queue(Key) will executed one after another	|
 |ContentType		|"application/json; charset=utf-8"		|Define type for send Data, see Data property						|
 |DataType			|"json"									|Define type for return data										|
+|UnblockMoment		|"after"								|when unblock container												|
 
 
 ## Anothers setups, used with Default Options Jquery 
@@ -116,6 +117,7 @@
             Queue: null,
             ContentType: "application/json; charset=utf-8",
             DataType: "json",
+			UnblockMoment: "after",
             //function
             SuccessFunction: null,
             ErrorFunction: null,
