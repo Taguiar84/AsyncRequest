@@ -77,6 +77,7 @@ describe("Block Element with error", function () {
 
     var request;
     var objRequest;
+    var timeoutRequest = 100;
     beforeEach(function () {
         request = Object.create($.asyncRequest);
         objRequest = request.getObjAsync();
@@ -98,6 +99,22 @@ describe("Block Element with error", function () {
         });
 
         waits(100);
+
+        runs(function () {
+            expect(bloqueado).toBe(true);
+        });
+    });
+
+    it("testa a remoção do block antes executar o evento de erro", function () {
+        objRequest.UnblockMoment = "before";
+        var bloqueado = false;
+        runs(function () {
+            objRequest.ErrorFunction = function (data) {
+                bloqueado = $.find(".blockUI").length == 0;
+            }
+            request.get(objRequest);
+        });
+        waits(timeoutRequest + 550);
 
         runs(function () {
             expect(bloqueado).toBe(true);

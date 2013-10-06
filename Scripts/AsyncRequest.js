@@ -74,21 +74,6 @@
                     }
                     Unblock(asyncObject.Containner);
                 }
-                
-                //if (func !== null) {
-                ////    func(data);
-
-                //    var funcInterval = function () {
-                        
-                //    };
-                //    setTimeout(funcInterval, 0.1);//runs in another thread, dont wair command in Mocktest
-                //}
-                //var funcUnblockAfter = function () {
-                //    Unblock(asyncObject.UnblockMoment, "after", asyncObject.Containner);
-                //}
-                //setTimeout(funcUnblockAfter, 0.1);
-
-
                 ExecuteNotify(data, options, requestType, 'success');
             };
         }
@@ -123,11 +108,22 @@
                 //        ExecuteDynamicCommand();
                 //        break
                 //}
-                Unblock(asyncObject.UnblockMoment, "before", asyncObject.Containner);
-                if (funcErro !== null) {
-                    funcErro(data);
+                if (asyncObject.UnblockMoment === "before") {
+                    var funcBefore = null;
+                    if (funcErro != null) {
+                        funcBefore = function () {
+                            funcErro(data);
+                        }
+                    }
+                    Unblock(asyncObject.Containner, funcBefore);
+
                 }
-                Unblock(asyncObject.UnblockMoment, "after", asyncObject.Containner);
+                else {
+                    if (funcErro != null) {
+                        funcErro(data);
+                    }
+                    Unblock(asyncObject.Containner);
+                }
                 ExecuteNotify(data, options, requestType, 'erro');
 
             };
