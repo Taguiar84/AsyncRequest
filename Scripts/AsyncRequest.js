@@ -164,7 +164,6 @@
                 } else {
                     $.extend(true, this.options, options);
                 }
-
                 if (this.options.notification.notifyFunction === null) {
                     this.options.notification.notifyFunction = this.NotifyDefault;
                 }
