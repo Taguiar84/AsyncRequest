@@ -188,6 +188,7 @@
                 if (this.options === undefined) {
                     this.init();
                 }
+                asyncObject = $.extend(true, $.asyncRequest.defaults.asyncObject, asyncObject);
                 var options = this.options,
                 func = function () {//group function to use queueKey
                     ConfigurarAntesRequest(options, asyncObject, "GET");
@@ -200,6 +201,7 @@
                 if (this.options === undefined) {
                     this.init();
                 }
+                asyncObject = $.extend(true, $.asyncRequest.defaults.asyncObject, asyncObject);
                 var options = this.options,
                 func = function () {
                     ConfigurarAntesRequest(options, asyncObject, "POST");
@@ -212,6 +214,7 @@
                 if (this.options === undefined) {
                     this.init();
                 }
+                asyncObject = $.extend(true, $.asyncRequest.defaults.asyncObject, asyncObject);
                 var options = this.options;
                 var func = function () {
                     ConfigurarAntesRequest(options, asyncObject, "UPDATE");
@@ -224,6 +227,7 @@
                 if (this.options === undefined) {
                     this.init();
                 }
+                asyncObject = $.extend(true, $.asyncRequest.defaults.asyncObject, asyncObject);
                 var options = this.options,
                 func = function () {
                     ConfigurarAntesRequest(options, asyncObject);
