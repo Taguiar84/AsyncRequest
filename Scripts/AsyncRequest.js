@@ -157,9 +157,14 @@
         var Module = {
 
             init: function (options) {
-                var defaults = {};
-                $.extend(true, defaults, $.asyncRequest.defaults);
-                this.options = $.extend(true, defaults, options);
+                if (this.options === undefined) {
+                    var defaults = {};
+                    $.extend(true, defaults, $.asyncRequest.defaults);
+                    this.options = $.extend(true, defaults, options);
+                } else {
+                    $.extend(true, this.options, options);
+                }
+
                 if (this.options.notification.notifyFunction === null) {
                     this.options.notification.notifyFunction = this.NotifyDefault;
                 }
