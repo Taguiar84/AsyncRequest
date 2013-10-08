@@ -55,6 +55,8 @@
 
 	$.asyncRequest.post(objRequest); //Cache true, DataType html but Notification is enable
 
+	request.init( {notification: {notifyFunction: function ( alert('OPS....'); )} } ); //Now is custom notification
+
 
 	### Use Queue
 
