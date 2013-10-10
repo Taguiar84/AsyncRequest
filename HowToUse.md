@@ -2,43 +2,26 @@
 
 ## Basic usages
 
-	// Sample 1		
+	// Sample 1
 	var successFunction = function(data){
 		alert('success function!');
 	};
 	$.asyncRequest.getAsync("www.URL.com", null, false, successFunction);
 	//OR
 	$.asyncRequest.getAsync("www.URL.com", null, false, function(data){ });	
-	//OR
-	$.asyncRequest.getAsync({
-		SuccessFunction: function(data){
-			alert('success function!');
-		}
-	});
+
 	// Sample 2
 	var objRequest = $.getObjAsync();
-	objRequest.Url= "www.URL.com";
+	objRequest.Url= "ww.URL.com";
 	objRequest.SuccessFunction = function(data){ };
 	$.asyncRequest.get(objRequest);
-	//OR
-	$.asyncRequest.get({
-		Url: "www.URL.com",
-		SuccessFunction: function(data){ }
-	});	
+	
 	// Sample 3
 	var objRequest = $.getObjAsync();
 	objRequest.Url= "ww.URL.com";
 	objRequest.SuccessFunction = function(data){ };
 	objRequest.Data = myDataObj
 	$.asyncRequest.post(objRequest);
-	//OR
-	$.asyncRequest.post({
-		Url: "www.URL.com",
-		SuccessFunction: function(data){ },
-		Data: mydataObj
-	});
-
-
 
 ## Advanced use
 
