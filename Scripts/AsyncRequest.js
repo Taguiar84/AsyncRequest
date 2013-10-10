@@ -157,24 +157,17 @@
         var Module = {
 
             init: function (options) {
-                if (this.options === undefined) {
-                    var defaults = {};
-                    $.extend(true, defaults, $.asyncRequest.defaults);
-                    this.options = $.extend(true, defaults, options);
-                } else {
-                    $.extend(true, this.options, options);
+                var defaults = {};
+                $.extend(true, defaults, $.asyncRequest.defaults);
+                $.extend(true, defaults, options);
+                if (defaults.notification.notifyFunction === null) {
+                    defaults.notification.notifyFunction = this.NotifyDefault;
                 }
-
-                if (this.options.notification.notifyFunction === null) {
-                    this.options.notification.notifyFunction = this.NotifyDefault;
-                }
+                return defaults;
             },
 
-            getObjAsync: function () {
-                if (this.options === undefined) {
-                    this.init();
-                }
-                return Object.create(this.options.asyncObject);
+            getObjAsync: function () {                
+                return Object.create($.asyncRequest.defaults.asyncObject);
             },
 
             getAsync: function (url, data, containner, successFunction, ErrorFunction, msg, queue) {
@@ -189,60 +182,45 @@
                 this.get(object);
             },
 
-            get: function (asyncObject) {
-                if (this.options === undefined) {
-                    this.init();
-                }
-                var options = this.options,
-                func = function () {//group function to use queueKey
+            get: function (asyncObject, config) {
+                var options = this.init(config);
+                $.extend(true, options, asyncObject); //asyncObj replace all
+                var func = function () {//group function to use queueKey
                     ConfigurarAntesRequest(options, asyncObject, "GET");
                     ConfigRequest("GET", asyncObject);
                 };
                 this.ExecuteFunction(asyncObject, func);
             },
 
-            post: function (asyncObject) {
-                if (this.options === undefined) {
-                    this.init();
-                }
-                var options = this.options,
-                func = function () {
+            post: function (asyncObject, config) {
+                var options = this.init(config);
+                $.extend(true, options, asyncObject); //asyncObj replace all
+                var func = function () {//group function to use queueKey
                     ConfigurarAntesRequest(options, asyncObject, "POST");
                     ConfigRequest("POST", asyncObject);
                 };
                 this.ExecuteFunction(asyncObject, func);
             },
 
-            update: function (asyncObject) {
-                if (this.options === undefined) {
-                    this.init();
-                }
-                var options = this.options;
-                var func = function () {
+            put: function (asyncObject, config) {
+                var options = this.init(config);
+                $.extend(true, options, asyncObject); //asyncObj replace all
+                var func = function () {//group function to use queueKey
                     ConfigurarAntesRequest(options, asyncObject, "UPDATE");
                     ConfigRequest("UPDATE", asyncObject);
                 };
                 this.ExecuteFunction(asyncObject, func);
             },
 
-            'delete': function (asyncObject) {
-                if (this.options === undefined) {
-                    this.init();
-                }
-                var options = this.options,
-                func = function () {
+            'delete': function (asyncObject, config) {
+                var options = this.init(config);
+                $.extend(true, options, asyncObject); //asyncObj replace all
+                var func = function () {//group function to use queueKey
                     ConfigurarAntesRequest(options, asyncObject);
                     ConfigRequest("DELETE", asyncObject);
                 };
                 this.ExecuteFunction(asyncObject, func);
-            },
-
-            getAjax: function () {
-                if (this.options === undefined) {
-                    this.init();
-                }
-                return this.options.ajax;
-            },
+            },            
 
             ExecuteFunction: function (asyncObject, func) {
 

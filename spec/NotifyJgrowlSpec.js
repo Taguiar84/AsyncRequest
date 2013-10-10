@@ -12,7 +12,7 @@ describe("Verifica notify - Jgrowl", function () {
     var request;
     var objRequest;
     beforeEach(function () {
-        request = Object.create($.asyncRequest);
+        request = $.asyncRequest;
         objRequest = request.getObjAsync();
         spyOn($, "ajax").andCallFake(function (params) {
             setTimeout(function () {
@@ -121,7 +121,7 @@ describe("Verifica notify Erro - Jgrowl", function () {
     var request;
     var objRequest;
     beforeEach(function () {
-        request = Object.create($.asyncRequest);
+        request = $.asyncRequest;
         objRequest = request.getObjAsync();
         spyOn($, "ajax").andCallFake(function (params) {
             setTimeout(function () {
