@@ -39,7 +39,7 @@ describe("AsyncRequest Object Teste", function () {
         //Ainda tem o objeto padrão
         expect($.asyncRequest.getAjax()).toBe($.ajax);
 
-    });    
+    });
 
 });
 describe("AsyncRequest Request", function () {
@@ -99,17 +99,6 @@ describe("AsyncRequest Request", function () {
         }
         request.get(objRequest);
         expect(dados).toBe(2);
-    });
-
-    it("Verifica request in-line", function () {
-        var retorno;
-        request.get({
-            SuccessFunction: function (data) {
-                retorno = data;
-            }
-        });
-        expect(retorno, "Happy Face");
-
     });
 
 });
