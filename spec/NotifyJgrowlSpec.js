@@ -11,6 +11,7 @@
 describe("Verifica notify - Jgrowl", function () {
     var request;
     var objRequest;
+    //var timeOutRequest = 30;
     beforeEach(function () {
         request = $.asyncRequest;
         objRequest = request.getObjAsync();
@@ -20,10 +21,10 @@ describe("Verifica notify - Jgrowl", function () {
                 params.error('Sad Face');
             }, 5);
         });
+        $('.jGrowl-notification').trigger('jGrowl.close');//Remove ALL, now CALL erroFunction too
     });
 
-    afterEach(function () {
-        $('.jGrowl-notification').trigger('jGrowl.close');//Remove ALL, now CALL erroFunction too
+    afterEach(function () {        
         //$('.jGrowl-notification:last').trigger('jGrowl.close');//Remove last
     });
 
@@ -31,8 +32,7 @@ describe("Verifica notify - Jgrowl", function () {
         runs(function () {
             request.get(objRequest);
         });
-        waits(1000);
-
+        waits(4000);
         runs(function () {
             var valor = $(".notificationTemplateMsg:first").text();
             expect(valor).toBe("");
@@ -43,7 +43,6 @@ describe("Verifica notify - Jgrowl", function () {
     it("chamada com POST", function () {
         runs(function () {
             request.post(objRequest);
-
         });
         waits(1000);
         runs(function () {

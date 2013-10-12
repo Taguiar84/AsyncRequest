@@ -58,7 +58,7 @@ describe("AsyncRequest Request", function () {
         expect(dados).toBe(2);
     });
 
-    it("Verifica request in-line", function () {
+    it("Verifica request in-line, get", function () {
         var retorno;
         $.asyncRequest.get({
             SuccessFunction: function (data) {
@@ -66,8 +66,33 @@ describe("AsyncRequest Request", function () {
             }
         });
         expect(retorno, "Happy Face");
-
     });
 
+    it("Verifica request in-line, post", function () {
+        var callback = jasmine.createSpy();
+        var callbackErro = jasmine.createSpy();
+        $.asyncRequest.post({ SuccessFunction: callback, ErrorFunction: callbackErro });
+
+        expect(callback).toHaveBeenCalledWith("Happy Face");
+        expect(callbackErro).toHaveBeenCalledWith("Sad Face");
+    });
+
+    it("Verifica request in-line, put", function () {
+        var callback = jasmine.createSpy();
+        var callbackErro = jasmine.createSpy();
+        $.asyncRequest.put({ SuccessFunction: callback, ErrorFunction: callbackErro });
+
+        expect(callback).toHaveBeenCalledWith("Happy Face");
+        expect(callbackErro).toHaveBeenCalledWith("Sad Face");
+    });
+
+    it("Verifica request in-line, delete", function () {
+        var callback = jasmine.createSpy();
+        var callbackErro = jasmine.createSpy();
+        $.asyncRequest.delete({ SuccessFunction: callback, ErrorFunction: callbackErro });
+
+        expect(callback).toHaveBeenCalledWith("Happy Face");
+        expect(callbackErro).toHaveBeenCalledWith("Sad Face");
+    });
 
 });
