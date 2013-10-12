@@ -49,29 +49,27 @@ describe("Verifica notify - Jgrowl", function () {
         runs(function () {
             var valor = $(".notificationTemplateMsg:first").text();
             //enconde html 
-            var expected = $('<div/>').text(request.options.notification.notificationSuccessMsgDefault).html();
+            var expected = $('<div/>').text(request.defaults.notification.notificationSuccessMsgDefault).html();
             expect(valor).toBe(expected);
             
         });
     });
 
     it("chamada com GET, precisa habilitar isso", function () {
-        runs(function () {
-            request.init({ notification: { notifyCommandType: ["GET"] } });
-            request.get(objRequest);
+        runs(function () {            
+            request.get(objRequest, { notification: { notifyCommandType: ["GET"] } });
 
         });
         waits(1000);
         runs(function () {
             var valor = $(".notificationTemplateMsg:first").text();
-            expect(valor).toBe(request.options.notification.notificationSuccessMsgDefault);
+            expect(valor).toBe(request.defaults.notification.notificationSuccessMsgDefault);
         });
     });
 
     it("desabilita o notify", function () {
-        runs(function () {
-            request.init({ notification: { notifyFunction: false } });
-            request.post(objRequest);
+        runs(function () {            
+            request.post(objRequest, { notification: { notifyFunction: false } });
         });
         waits(1000);
         runs(function () {
@@ -84,9 +82,8 @@ describe("Verifica notify - Jgrowl", function () {
     it("personalizando MSG de sucesso e erro", function () {
         var msg = "Custom Mensage";
         var msgErro = msg + " erro";
-        runs(function () {
-            request.init({ notification: { notificationSuccessMsgDefault: msg, notificationErrorMsgDefault: msgErro } });
-            request.post(objRequest);
+        runs(function () {            
+            request.post(objRequest, { notification: { notificationSuccessMsgDefault: msg, notificationErrorMsgDefault: msgErro } });
 
         });
         waits(1000);
@@ -104,16 +101,13 @@ describe("Verifica notify - Jgrowl", function () {
 
         var func = jasmine.createSpy("notify");
         runs(function () {
-            request.init({ notification: { notifyFunction: func, notificationSuccessMsgDefault: "Funcção Personalizada", notificationErrorMsgDefault: "Funcção Personalizada erro" } });
-            request.post(objRequest);
+            request.post(objRequest, { notification: { notifyFunction: func, notificationSuccessMsgDefault: "Funcção Personalizada", notificationErrorMsgDefault: "Funcção Personalizada erro" } });
         });
         waits(1000);
         runs(function () {
             expect(func).toHaveBeenCalled();
         });
     });
-
-
 });
 
 
@@ -154,7 +148,7 @@ describe("Verifica notify Erro JSON - Jgrowl", function () {
     var request;
     var objRequest;
     beforeEach(function () {
-        request = Object.create($.asyncRequest);
+        request = $.asyncRequest;
         objRequest = request.getObjAsync();
         spyOn($, "ajax").andCallFake(function (params) {
             setTimeout(function () {

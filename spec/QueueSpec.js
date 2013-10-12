@@ -10,11 +10,10 @@ describe("Queue Execute", function () {
     var request;
     var objRequest;
     var timeOutRequest = 30;
-
+    var configBase = { notification: { notifyFunction: false } };
     beforeEach(function () {
-        request = Object.create($.asyncRequest);
-        request.init({ notification: { notifyFunction: false } })
-
+        request = $.asyncRequest;
+        
         //objRequest = request.getObjAsync();
         spyOn($, "ajax").andCallFake(function (params) {
             setTimeout(function () { params.success('opa'); params.complete("Be Nice!!!"); }, timeOutRequest);

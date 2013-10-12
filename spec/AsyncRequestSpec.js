@@ -5,49 +5,9 @@
 /// <reference path="../Scripts/AsyncRequest.Queue.js" />
 /// <reference path="../Scripts/AsyncRequest.js" />
 
-describe("AsyncRequest Object Teste", function () {
-    var obj = $.asyncRequest;
-    var anotherObj = $.asyncRequest;
-
-    it("Verifica se o Init não foi chamado na instancia", function () {
-
-        //expect(obj.getAjax()).toBe($.ajax);
-
-        obj = Object.create($.asyncRequest);//Novo, Testa getObjAsync;
-        obj.getObjAsync();
-        //expect(obj.getAjax()).toBe($.ajax);
-
-        //Não pode ter chamado o objeto padrão tbm
-        expect($.asyncRequest.options).toBe(undefined);
-        //expect($.asyncRequest.getAjax()).toBe($.ajax);
-
-    });
-
-    it("Verifica a troca de valor pelo init", function () {
-
-        obj.init({ ajax: 'laga', notification: { notifyFunction: false } })
-        //expect(obj.getAjax()).toBe('laga');
-        //expect(obj.options.ajax).toBe('laga');
-
-        anotherObj.init({ ajax: 'another', notification: { notifyFunction: false } })
-        //expect(anotherObj.getAjax()).toBe('another');
-        //expect(anotherObj.options.ajax).toBe('another');
-
-        //Não alterar com +1 objeto
-        //expect(obj.getAjax()).toBe('laga');
-
-        //Ainda tem o objeto padrão
-        //expect($.asyncRequest.getAjax()).toBe($.ajax);
-
-    });
-
-});
 describe("AsyncRequest Request", function () {
-    var request;
-    var objRequest;
     beforeEach(function () {
-        request = $.asyncRequest;
-        objRequest = request.getObjAsync();
+        objRequest = $.asyncRequest.getObjAsync();
         spyOn($, "ajax").andCallFake(function (params) {
             params.success("Happy Face");
             params.error("Sad Face");
@@ -59,7 +19,7 @@ describe("AsyncRequest Request", function () {
         var callback = jasmine.createSpy();
         var callbackErro = jasmine.createSpy();
         runs(function () {
-            request.getAsync("www.URL.com", [], null, callback, callbackErro);
+            $.asyncRequest.getAsync("www.URL.com", [], null, callback, callbackErro);
         });
         waits(1);
         runs(function () {
@@ -75,7 +35,7 @@ describe("AsyncRequest Request", function () {
         //}        
         objRequest.SuccessFunction = callback;
         runs(function () {
-            request.get(objRequest);
+            $.asyncRequest.get(objRequest);
         });
         waits(1);
         runs(function () {
@@ -87,7 +47,7 @@ describe("AsyncRequest Request", function () {
         objRequest.ErroFunction = function (data) {
             expect(data).toBe("Sad Face");
         }
-        request.get(objRequest);
+        $.asyncRequest.get(objRequest);
     });
     it("Testando o complete request", function () {
         var dados = 0;
@@ -97,7 +57,7 @@ describe("AsyncRequest Request", function () {
         objRequest.CompleteFunction = function (data) {
             dados = 2
         }
-        request.get(objRequest);
+        $.asyncRequest.get(objRequest);
         expect(dados).toBe(2);
     });
 

@@ -14,7 +14,7 @@ describe("Verifica notify - Noty", function () {
     beforeEach(function () {
         //Disable Jgrowl
         $.jGrowl = null;
-        request = Object.create($.asyncRequest);
+        request = $.asyncRequest;
         objRequest = request.getObjAsync();
         spyOn($, "ajax").andCallFake(function (params) {
             setTimeout(function () {
@@ -36,10 +36,10 @@ describe("Verifica notify - Noty", function () {
 
         runs(function () {
             var valor = $(".noty_text:first").text();
-            expect(valor).toBe(request.options.notification.notificationSuccessMsgDefault);
+            expect(valor).toBe(request.defaults.notification.notificationSuccessMsgDefault);
 
             var valor = $(".noty_text:last").text();
-            expect(valor).toBe(request.options.notification.notificationErrorMsgDefault);
+            expect(valor).toBe(request.defaults.notification.notificationErrorMsgDefault);
 
         });
 

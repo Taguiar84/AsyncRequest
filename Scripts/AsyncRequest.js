@@ -10,244 +10,173 @@
 
 (function ($) {
     "use strict";
-
-    function ExecuteNotify(data, options, requestType, eventType) {
-        if (options.notification.notifyFunction !== null) {
-            options.notification.notifyCommandType.forEach(function (elem) {
-                if (elem === requestType && options.notification.notifyFunction !== false) {
-                    options.notification.notifyFunction(eventType, data);
-                }
-            });
-        }
-    }
-
-    function Unblock(containner, funcBefore) {//moment is "before" / "after"
-
-        if (containner !== false) {
-            if (containner === null) { //BlockPage
-                $.unblockUI({ onUnblock: funcBefore });
-            } else {
-                $(containner).unblock({ onUnblock: funcBefore });
-            }
-        }
-    }
-
-    function ConfigurarAntesRequest(options, asyncObject, requestType) {
-
-        if (asyncObject.Msg === null || asyncObject.Msg === undefined) {
-            asyncObject.Msg = options.loadTextTemplate.replace("${msg}", options.loadText);
-        }
-        if (asyncObject.Containner !== false) {
-            if (asyncObject.Containner === null) {//BlockPage
-                $.blockUI({ message: asyncObject.Msg });
-            } else {
-                $(asyncObject.Containner).block({ message: asyncObject.Msg });
-            }
-        }
-
-        if (asyncObject.Data === null) {
-            asyncObject.DataRequest = {};
-        } else {
-            if (asyncObject.ContentType.indexOf("application/json") !== -1) {
-                asyncObject.DataRequest = JSON.stringify(asyncObject.Data);
-            } else {
-                asyncObject.DataRequest = asyncObject.Data;
-            }
-        }
-        if (asyncObject.SuccessFunction !== false) {
-            var func = asyncObject.SuccessFunction;
-            asyncObject.SuccessFunction = function (data) {
-
-                if (asyncObject.UnblockMoment === "before") {
-                    var funcBefore = null;
-                    if (func != null) {
-                        funcBefore = function () {
-                            func(data);
-                        }
-                    }                        
-                    Unblock(asyncObject.Containner, funcBefore);
-                    
-                }
-                else {
-                    if (func != null) {
-                        func(data);
-                    }
-                    Unblock(asyncObject.Containner);
-                }
-                ExecuteNotify(data, options, requestType, 'success');
-            };
-        }
-
-        if (asyncObject.ErrorFunction !== false) {
-            var funcErro = asyncObject.ErrorFunction;
-            asyncObject.ErrorFunction = function (data) {
-
-                //if (asyncObject.ReturnType == "json") {
-                //    if (data.responseText != null && data.responseText != "") {
-                //        jsonRetorno = JSON.parse(data.responseText);
-                //        jsonRetorno.Message = Core.Notification.ErrorMsgDefault;
-                //        data.responseText = JSON.stringify(jsonRetorno);
-                //    }
-                //}
-
-                //switch (request.statusCode().status) {
-                //    //Core.HandlerErroInterno(data);
-                //    //break;
-                //    case 401: //Unauthorized
-                //        Core.HandlerErroInterno(data);
-                //        break;
-                //    case 404: //Not found
-                //        Core.HandlerErroInterno(data);
-                //        break;
-                //    case 500: //erro interno
-                //        Core.HandlerErroInterno(data);
-                //        break;
-                //    case 400: //BadRequest
-                //    default:
-                //        asyncObject.ErrorFunction(data);
-                //        ExecuteDynamicCommand();
-                //        break
-                //}
-                if (asyncObject.UnblockMoment === "before") {
-                    var funcBefore = null;
-                    if (funcErro != null) {
-                        funcBefore = function () {
-                            funcErro(data);
-                        }
-                    }
-                    Unblock(asyncObject.Containner, funcBefore);
-
-                }
-                else {
-                    if (funcErro != null) {
-                        funcErro(data);
-                    }
-                    Unblock(asyncObject.Containner);
-                }
-                ExecuteNotify(data, options, requestType, 'erro');
-
-            };
-        }
-
-        //Sem utilidade ainda
-        if (asyncObject.CompleteFunction !== false) {
-            var funcComplete = asyncObject.CompleteFunction;
-            asyncObject.CompleteFunction = function (data) {
-                if (funcComplete !== null) {
-                    funcComplete(data);
-                }
-            };
-        }
-    }
-
-    function ConfigRequest(type, asyncObject) {
-        $.ajax({
-            type: type,
-            url: asyncObject.Url,
-            data: asyncObject.DataRequest,
-            contentType: asyncObject.ContentType,
-            success: asyncObject.SuccessFunction,
-            error: asyncObject.ErrorFunction,
-            complete: asyncObject.CompleteFunction,
-            dataType: asyncObject.DataType
-        });
-    }
-
     $.fn.asyncRequest = new function () {
-        var Module = {
+        var self = this;
 
-            init: function (options) {
+        self.init =
+            function (config) {
                 var defaults = {};
                 $.extend(true, defaults, $.asyncRequest.defaults);
-                $.extend(true, defaults, options);
+                $.extend(true, defaults, config);
                 if (defaults.notification.notifyFunction === null) {
-                    defaults.notification.notifyFunction = this.NotifyDefault;
+                    defaults.notification.notifyFunction = self.NotifyDefault;
                 }
                 return defaults;
-            },
+            }
 
-            getObjAsync: function () {                
-                return Object.create($.asyncRequest.defaults.asyncObject);
-            },
-
-            getAsync: function (url, data, containner, successFunction, ErrorFunction, msg, queue) {
-                var object = this.getObjAsync();
-                object.Url = url;
-                object.Data = data;
-                object.SuccessFunction = successFunction;
-                object.ErrorFunction = ErrorFunction;
-                object.Msg = msg;
-                object.Queue = queue;
-                object.Containner = containner;
-                this.get(object);
-            },
-
-            get: function (asyncObject, config) {
-                var options = this.init(config);
-                $.extend(true, options, asyncObject); //asyncObj replace all
-                var func = function () {//group function to use queueKey
-                    ConfigurarAntesRequest(options, asyncObject, "GET");
-                    ConfigRequest("GET", asyncObject);
-                };
-                this.ExecuteFunction(asyncObject, func);
-            },
-
-            post: function (asyncObject, config) {
-                var options = this.init(config);
-                $.extend(true, options, asyncObject); //asyncObj replace all
-                var func = function () {//group function to use queueKey
-                    ConfigurarAntesRequest(options, asyncObject, "POST");
-                    ConfigRequest("POST", asyncObject);
-                };
-                this.ExecuteFunction(asyncObject, func);
-            },
-
-            put: function (asyncObject, config) {
-                var options = this.init(config);
-                $.extend(true, options, asyncObject); //asyncObj replace all
-                var func = function () {//group function to use queueKey
-                    ConfigurarAntesRequest(options, asyncObject, "UPDATE");
-                    ConfigRequest("UPDATE", asyncObject);
-                };
-                this.ExecuteFunction(asyncObject, func);
-            },
-
-            'delete': function (asyncObject, config) {
-                var options = this.init(config);
-                $.extend(true, options, asyncObject); //asyncObj replace all
-                var func = function () {//group function to use queueKey
-                    ConfigurarAntesRequest(options, asyncObject);
-                    ConfigRequest("DELETE", asyncObject);
-                };
-                this.ExecuteFunction(asyncObject, func);
-            },            
-
-            ExecuteFunction: function (asyncObject, func) {
-
-                var queueUtil = $.asyncRequest.defaults.queueUtil,
-                key = queueUtil.configQueue(asyncObject);//key in queue to execute;
-
-                if (key !== null) {//Put in Queue
-                    var Objqueue = queueUtil.getQueue(key);
-                    Objqueue.queue.push(function () {
-                        func();
-                    });
-                    if (!Objqueue.Executing) {
-                        Objqueue.Executing = true;
-                        Objqueue.queue.execute();
+        self.Unblock =
+            function (containner, funcBefore) {//moment is "before" / "after"
+                if (containner !== false) {
+                    if (containner === null) { //BlockPage
+                        $.unblockUI({ onUnblock: funcBefore });
+                    } else {
+                        $(containner).unblock({ onUnblock: funcBefore });
                     }
-                } else { //No Queue, execute!!
-                    func();
                 }
-            },
+            }
 
-            NotifyDefault: function (type, data) {
+        self.ConfigurarAntesRequest =
+            function (options, asyncObject, requestType) {
+
+                if (asyncObject.Msg === null || asyncObject.Msg === undefined) {
+                    asyncObject.Msg = options.loadTextTemplate.replace("${msg}", options.loadText);
+                }
+                if (asyncObject.Containner !== false) {
+                    if (asyncObject.Containner === null) {//BlockPage
+                        $.blockUI({ message: asyncObject.Msg });
+                    } else {
+                        $(asyncObject.Containner).block({ message: asyncObject.Msg });
+                    }
+                }
+
+                if (asyncObject.Data === null) {
+                    asyncObject.DataRequest = {};
+                } else {
+                    if (asyncObject.ContentType.indexOf("application/json") !== -1) {
+                        asyncObject.DataRequest = JSON.stringify(asyncObject.Data);
+                    } else {
+                        asyncObject.DataRequest = asyncObject.Data;
+                    }
+                }
+                if (asyncObject.SuccessFunction !== false) {
+                    var func = asyncObject.SuccessFunction;
+                    asyncObject.SuccessFunction = function (data) {
+
+                        if (asyncObject.UnblockMoment === "before") {
+                            var funcBefore = null;
+                            if (func != null) {
+                                funcBefore = function () {
+                                    func(data);
+                                }
+                            }
+                            self.Unblock(asyncObject.Containner, funcBefore);
+
+                        }
+                        else {
+                            if (func != null) {
+                                func(data);
+                            }
+                            self.Unblock(asyncObject.Containner);
+                        }
+                        self.ExecuteNotify(data, options, requestType, 'success');
+                    };
+                }
+
+                if (asyncObject.ErrorFunction !== false) {
+                    var funcErro = asyncObject.ErrorFunction;
+                    asyncObject.ErrorFunction = function (data) {
+
+                        //if (asyncObject.ReturnType == "json") {
+                        //    if (data.responseText != null && data.responseText != "") {
+                        //        jsonRetorno = JSON.parse(data.responseText);
+                        //        jsonRetorno.Message = Core.Notification.ErrorMsgDefault;
+                        //        data.responseText = JSON.stringify(jsonRetorno);
+                        //    }
+                        //}
+
+                        //switch (request.statusCode().status) {
+                        //    //Core.HandlerErroInterno(data);
+                        //    //break;
+                        //    case 401: //Unauthorized
+                        //        Core.HandlerErroInterno(data);
+                        //        break;
+                        //    case 404: //Not found
+                        //        Core.HandlerErroInterno(data);
+                        //        break;
+                        //    case 500: //erro interno
+                        //        Core.HandlerErroInterno(data);
+                        //        break;
+                        //    case 400: //BadRequest
+                        //    default:
+                        //        asyncObject.ErrorFunction(data);
+                        //        ExecuteDynamicCommand();
+                        //        break
+                        //}
+                        if (asyncObject.UnblockMoment === "before") {
+                            var funcBefore = null;
+                            if (funcErro != null) {
+                                funcBefore = function () {
+                                    funcErro(data);
+                                }
+                            }
+                            self.Unblock(asyncObject.Containner, funcBefore);
+
+                        }
+                        else {
+                            if (funcErro != null) {
+                                funcErro(data);
+                            }
+                            self.Unblock(asyncObject.Containner);
+                        }
+                        self.ExecuteNotify(data, options, requestType, 'erro');
+
+                    };
+                }
+
+                //Sem utilidade ainda
+                if (asyncObject.CompleteFunction !== false) {
+                    var funcComplete = asyncObject.CompleteFunction;
+                    asyncObject.CompleteFunction = function (data) {
+                        if (funcComplete !== null) {
+                            funcComplete(data);
+                        }
+                    };
+                }
+            }
+
+        self.ConfigRequest =
+            function (type, asyncObject) {
+                $.ajax({
+                    type: type,
+                    url: asyncObject.Url,
+                    data: asyncObject.DataRequest,
+                    contentType: asyncObject.ContentType,
+                    success: asyncObject.SuccessFunction,
+                    error: asyncObject.ErrorFunction,
+                    complete: asyncObject.CompleteFunction,
+                    dataType: asyncObject.DataType
+                });
+            }
+
+        self.ExecuteNotify =
+            function (data, options, requestType, eventType) {
+                if (options.notification.notifyFunction !== null) {
+                    options.notification.notifyCommandType.forEach(function (elem) {
+                        if (elem === requestType && options.notification.notifyFunction !== false) {
+                            options.notification.notifyFunction(eventType, data, options);
+                        }
+                    });
+                }
+            }
+
+        self.NotifyDefault =
+            function (type, data, config) {
                 var notification = null,
                 msg, stack;
                 if ($.jGrowl !== null) {
-                    notification = new asyncRequest_Notification_JGrowl(this);
+                    notification = new asyncRequest_Notification_JGrowl(config.notification);
                 } else if ($.noty !== null) {
-                    notification = new asyncRequest_Notification_Notfy(this);
+                    notification = new asyncRequest_Notification_Notfy(config.notification);
                 }
 
                 switch (type) {
@@ -273,9 +202,107 @@
                         break;
                 }
             }
-        };
-        return Module;
+
+
+        self.getObjAsync =
+            function (config) {
+                var options = self.init(config);
+                return Object.create(options.asyncObject);
+            }
+
+        self.getAsync =
+            function (url, data, containner, successFunction, ErrorFunction, msg, queue) {
+                var object = self.getObjAsync();
+                object.Url = url;
+                object.Data = data;
+                object.SuccessFunction = successFunction;
+                object.ErrorFunction = ErrorFunction;
+                object.Msg = msg;
+                object.Queue = queue;
+                object.Containner = containner;
+                self.get(object);
+            }
+
+        self.get =
+            function (asyncObject, config) {
+                var options = self.init(config);
+                $.extend(true, options, asyncObject); //asyncObj replace all
+                var func = function () {//group function to use queueKey
+                    self.ConfigurarAntesRequest(options, asyncObject, "GET");
+                    self.ConfigRequest("GET", asyncObject);
+                };
+                self.ExecuteFunction(asyncObject, func);
+            }
+
+        self.post =
+            function (asyncObject, config) {
+                var options = self.init(config);
+                $.extend(true, options, asyncObject); //asyncObj replace all
+                var func = function () {//group function to use queueKey
+                    self.ConfigurarAntesRequest(options, asyncObject, "POST");
+                    self.ConfigRequest("POST", asyncObject);
+                };
+                self.ExecuteFunction(asyncObject, func);
+            }
+
+        self.put =
+            function (asyncObject, config) {
+                var options = self.init(config);
+                $.extend(true, options, asyncObject); //asyncObj replace all
+                var func = function () {//group function to use queueKey
+                    ConfigurarAntesRequest(options, asyncObject, "UPDATE");
+                    ConfigRequest("UPDATE", asyncObject);
+                };
+                self.ExecuteFunction(asyncObject, func);
+            }
+
+        self.delete =
+        function (asyncObject, config) {
+            var options = self.init(config);
+            $.extend(true, options, asyncObject); //asyncObj replace all
+            var func = function () {//group function to use queueKey
+                self.ConfigurarAntesRequest(options, asyncObject);
+                self.ConfigRequest("DELETE", asyncObject);
+            };
+            self.ExecuteFunction(asyncObject, func);
+        }
+
+        self.getAjax =
+        function () {
+            //self.init();
+            return $.asyncRequest.defaults.ajax;
+        }
+
+        self.ExecuteFunction =
+            function (asyncObject, func) {
+
+                var queueUtil = $.asyncRequest.defaults.queueUtil,
+                key = queueUtil.configQueue(asyncObject);//key in queue to execute;
+
+                if (key !== null) {//Put in Queue
+                    var Objqueue = queueUtil.getQueue(key);
+                    Objqueue.queue.push(function () {
+                        func();
+                    });
+                    if (!Objqueue.Executing) {
+                        Objqueue.Executing = true;
+                        Objqueue.queue.execute();
+                    }
+                } else { //No Queue, execute!!
+                    func();
+                }
+            }        
+
+        return {
+            getAsync: self.getAsync,
+            get: self.get,
+            post: self.post,
+            put: self.put,
+            getObjAsync: self.getObjAsync,
+            getAjax: self.getAjax
+        }
     };
+    //$.fn.asyncRequest = new asyncRequest();
 
     $.asyncRequest = $.fn.asyncRequest;
 

@@ -16,7 +16,7 @@
 		}
 	});
 	// Sample 2
-	var objRequest = $.getObjAsync();
+	var objRequest = $.asyncRequest.getObjAsync();
 	objRequest.Url= "www.URL.com";
 	objRequest.SuccessFunction = function(data){ };
 	$.asyncRequest.get(objRequest);
@@ -26,7 +26,7 @@
 		SuccessFunction: function(data){ }
 	});	
 	// Sample 3
-	var objRequest = $.getObjAsync();
+	var objRequest = $.asyncRequest.getObjAsync();
 	objRequest.Url= "ww.URL.com";
 	objRequest.SuccessFunction = function(data){ };
 	objRequest.Data = myDataObj
@@ -44,16 +44,17 @@
 
 	### Diff request options
 
-	//
-	request = Object.create($.asyncRequest); //Copy request functions    
-	request.init({ asyncObject: {Cache: true, DataType: 'html'} }); // "request" will make cache and datatype is html
-	var objRequest = request.getObjAsync(); create object request //Objrequest use Cache and DataType is html
+	//	
+	var objRequest = $.asyncRequest.getObjAsync(); create object request //Objrequest use Cache and DataType is html
+	objRequest.Cache = true;
+	objRequest.DataType = 'html';
 
 	var anotherObjRequest = $.asyncRequest.getObjAsync(); // Use dafault options no Cache and Datype is json
-
-	request.init( {notification: {notifyFunction: false} } ); //Now disable notifycation
-
-	$.asyncRequest.post(objRequest); //Cache true, DataType html but Notification is enable
+	$.asyncRequest.post(anotherObjRequest, 
+		{notification: {notifyFunction: false} }); //Cache true, DataType html but Notification is disable
+	//OR in-line
+	$.asyncRequest.post({}, 
+		{notification: {notifyFunction: false} }); //It use default object config, only change notification
 
 
 	### Use Queue
