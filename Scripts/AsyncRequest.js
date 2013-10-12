@@ -226,7 +226,7 @@
         self.get =
             function (asyncObject, config) {
                 var options = self.init(config);
-                $.extend(true, options, asyncObject); //asyncObj replace all
+                asyncObject = $.extend(true, options.asyncObject, asyncObject); //asyncObj replace all
                 var func = function () {//group function to use queueKey
                     self.ConfigurarAntesRequest(options, asyncObject, "GET");
                     self.ConfigRequest("GET", asyncObject);
@@ -237,7 +237,7 @@
         self.post =
             function (asyncObject, config) {
                 var options = self.init(config);
-                $.extend(true, options, asyncObject); //asyncObj replace all
+                asyncObject = $.extend(true, options.asyncObject, asyncObject); //asyncObj replace all
                 var func = function () {//group function to use queueKey
                     self.ConfigurarAntesRequest(options, asyncObject, "POST");
                     self.ConfigRequest("POST", asyncObject);
@@ -248,7 +248,7 @@
         self.put =
             function (asyncObject, config) {
                 var options = self.init(config);
-                $.extend(true, options, asyncObject); //asyncObj replace all
+                asyncObject = $.extend(true, options.asyncObject, asyncObject); //asyncObj replace all
                 var func = function () {//group function to use queueKey
                     ConfigurarAntesRequest(options, asyncObject, "UPDATE");
                     ConfigRequest("UPDATE", asyncObject);
@@ -259,7 +259,7 @@
         self.delete =
         function (asyncObject, config) {
             var options = self.init(config);
-            $.extend(true, options, asyncObject); //asyncObj replace all
+            asyncObject = $.extend(true, options.asyncObject, asyncObject); //asyncObj replace all
             var func = function () {//group function to use queueKey
                 self.ConfigurarAntesRequest(options, asyncObject);
                 self.ConfigRequest("DELETE", asyncObject);

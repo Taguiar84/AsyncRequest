@@ -30,9 +30,6 @@ describe("AsyncRequest Request", function () {
 
     it("Fazendo um request com sucesso", function () {
         var callback = jasmine.createSpy();
-        //objRequest.SuccessFunction = function (data) {
-        //    expect(data).toBe("Happy Face");
-        //}        
         objRequest.SuccessFunction = callback;
         runs(function () {
             $.asyncRequest.get(objRequest);
@@ -60,5 +57,17 @@ describe("AsyncRequest Request", function () {
         $.asyncRequest.get(objRequest);
         expect(dados).toBe(2);
     });
+
+    it("Verifica request in-line", function () {
+        var retorno;
+        $.asyncRequest.get({
+            SuccessFunction: function (data) {
+                retorno = data;
+            }
+        });
+        expect(retorno, "Happy Face");
+
+    });
+
 
 });
