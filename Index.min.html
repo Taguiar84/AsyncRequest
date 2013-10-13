@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>AsyncRequest Home</title>
+    <link href="Content/jasmine/jasmine.css" rel="stylesheet" />
+    <link href="Content/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="Content/jquery.jgrowl.min.css" rel="stylesheet" />
+    <link href="Content/AsyncRequest.min.css" rel="stylesheet" />
+</head>
+<body>
+    for the time this is Home and Test page.
+    
+    <div class="row">
+        <div class="col-md-12">
+            Teste, Teste, Teste!!!!
+        </div>
+    </div>    
+    <label>Visual Compoments to teste</label>
+    <div class="row">
+        <div class="col-md-3">
+            <label class="success">Success</label>
+            <div id="sucessDiv">
+
+            </div>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-3">sdfsdf</div>
+        <div class="col-md-3">sdfsdf</div>
+    </div>
+
+    <br />
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+
+
+    <script src="Scripts/jquery-2.0.3.min.js"></script>    
+    <script src="Scripts/jquery.blockUI.min.js"></script>  
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/jquery.jgrowl.min.js"></script>
+    <script src="Scripts/noty/jquery.noty.js"></script>
+    <!--<script src="Scripts/noty/layouts/top.js"></script>-->
+    <script src="Scripts/noty/layouts/topRight.js"></script>
+    <script src="Scripts/noty/themes/default.js"></script>
+
+    <!-- Test framework-->
+    <!--<script src="Scripts/sinon-server-1.7.3.js"></script>
+    <script src="Scripts/qunit-1.11.0.js"></script>
+    <script src="Scripts/sinon-1.7.3.js"></script>        
+    <script src="Scripts/sinon-qunit-1.0.0.js"></script>-->
+    <script src="Scripts/jasmine/jasmine.js"></script>
+    <script src="Scripts/jasmine/jasmine-html.js"></script>
+
+    <!-- System to test-->
+    <script src="Scripts/AsyncRequest.Queue.min.js"></script>
+    <script src="Scripts/AsyncRequest.Notification.min.js"></script>
+    <script src="Scripts/AsyncRequest.min.js"></script>
+    <!--<script src="Scripts/Globalization/AsyncRequest.en-US.js"></script>
+    <script src="Scripts/Globalization/AsyncRequest.pt-BR.js"></script>-->
+
+    <!-- Test files-->    
+    <script src="spec/AsyncRequestSpec.js"></script>
+    <script src="spec/VisualSpec.js"></script>
+    <script src="spec/QueueSpec.js"></script>
+    <script src="spec/NotifyJgrowlSpec.js"></script>
+    <script src="spec/NotifyNotySpec.js"></script>
+    <script>
+
+        /*****************************************************************/
+        /*            Jasmine spec runner                                */
+        /*****************************************************************/
+        (function () {
+            var jasmineEnv = jasmine.getEnv();
+            jasmineEnv.updateInterval = 1000;
+
+            var trivialReporter = new jasmine.TrivialReporter();
+
+            jasmineEnv.addReporter(trivialReporter);
+
+            jasmineEnv.specFilter = function (spec) {
+                return trivialReporter.specFilter(spec);
+            };
+
+            var currentWindowOnload = window.onload;
+
+            window.onload = function () {
+                if (currentWindowOnload) {
+                    currentWindowOnload();
+                }
+                execJasmine();
+            };
+
+            function execJasmine() {
+                jasmineEnv.execute();
+                trivialReporter.outerDiv.className += ' show-passed';
+            }
+
+        })();
+
+
+
+    </script>
+
+
+</body>
+</html>
