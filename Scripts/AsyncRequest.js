@@ -22,7 +22,7 @@
                     defaults.notification.notifyFunction = self.NotifyDefault;
                 }
                 return defaults;
-            }
+            };
 
         self.Unblock =
             function (containner, funcBefore) {//moment is "before" / "after"
@@ -33,7 +33,7 @@
                         $(containner).unblock({ onUnblock: funcBefore });
                     }
                 }
-            }
+            };
 
         self.ConfigurarAntesRequest =
             function (options, asyncObject, requestType) {
@@ -64,16 +64,15 @@
 
                         if (asyncObject.UnblockMoment === "before") {
                             var funcBefore = null;
-                            if (func != null) {
+                            if (func !== null) {
                                 funcBefore = function () {
                                     func(data);
-                                }
+                                };
                             }
                             self.Unblock(asyncObject.Containner, funcBefore);
 
-                        }
-                        else {
-                            if (func != null) {
+                        } else {
+                            if (func !== null) {
                                 func(data);
                             }
                             self.Unblock(asyncObject.Containner);
@@ -114,22 +113,20 @@
                         //}
                         if (asyncObject.UnblockMoment === "before") {
                             var funcBefore = null;
-                            if (funcErro != null) {
+                            if (funcErro !== null) {
                                 funcBefore = function () {
                                     funcErro(data);
-                                }
+                                };
                             }
                             self.Unblock(asyncObject.Containner, funcBefore);
 
-                        }
-                        else {
-                            if (funcErro != null) {
+                        } else {
+                            if (funcErro !== null) {
                                 funcErro(data);
                             }
                             self.Unblock(asyncObject.Containner);
                         }
                         self.ExecuteNotify(data, options, requestType, 'erro');
-
                     };
                 }
 
@@ -142,7 +139,7 @@
                         }
                     };
                 }
-            }
+            };
 
         self.ConfigRequest =
             function (type, asyncObject) {
@@ -156,7 +153,7 @@
                     complete: asyncObject.CompleteFunction,
                     dataType: asyncObject.DataType
                 });
-            }
+            };
 
         self.ExecuteNotify =
             function (data, options, requestType, eventType) {
@@ -167,12 +164,12 @@
                         }
                     });
                 }
-            }
+            };
 
         self.NotifyDefault =
             function (type, data, config) {
                 var notification = null,
-                msg, stack;
+                    msg, stack;
                 if ($.jGrowl !== null) {
                     notification = new asyncRequest_Notification_JGrowl(config.notification);
                 } else if ($.noty !== null) {
@@ -201,14 +198,14 @@
                         notification.notifyInfo();
                         break;
                 }
-            }
+            };
 
 
         self.getObjAsync =
             function (config) {
                 var options = self.init(config);
                 return Object.create(options.asyncObject);
-            }
+            };
 
         self.getAsync =
             function (url, data, containner, successFunction, ErrorFunction, msg, queue) {
@@ -221,7 +218,7 @@
                 object.Queue = queue;
                 object.Containner = containner;
                 self.get(object);
-            }
+            };
 
         self.get =
             function (asyncObject, config) {
@@ -232,7 +229,7 @@
                     self.ConfigRequest("GET", asyncObject);
                 };
                 self.ExecuteFunction(asyncObject, func);
-            }
+            };
 
         self.post =
             function (asyncObject, config) {
@@ -243,7 +240,7 @@
                     self.ConfigRequest("POST", asyncObject);
                 };
                 self.ExecuteFunction(asyncObject, func);
-            }
+            };
 
         self.put =
             function (asyncObject, config) {
@@ -254,7 +251,7 @@
                     self.ConfigRequest("UPDATE", asyncObject);
                 };
                 self.ExecuteFunction(asyncObject, func);
-            }
+            };
 
         self.delete =
         function (asyncObject, config) {
@@ -265,13 +262,13 @@
                 self.ConfigRequest("DELETE", asyncObject);
             };
             self.ExecuteFunction(asyncObject, func);
-        }
+        };
 
         self.getAjax =
         function () {
             //self.init();
             return $.asyncRequest.defaults.ajax;
-        }
+        };
 
         self.ExecuteFunction =
             function (asyncObject, func) {
@@ -291,7 +288,7 @@
                 } else { //No Queue, execute!!
                     func();
                 }
-            }        
+            };
 
         return {
             getAsync: self.getAsync,
@@ -301,7 +298,7 @@
             'delete': self.delete,
             getObjAsync: self.getObjAsync,
             getAjax: self.getAjax
-        }
+        };
     };
     //$.fn.asyncRequest = new asyncRequest();
 
