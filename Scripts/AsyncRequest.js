@@ -253,22 +253,22 @@
                 self.ExecuteFunction(asyncObject, func);
             };
 
-        self.delete =
-        function (asyncObject, config) {
-            var options = self.init(config);
-            asyncObject = $.extend(true, options.asyncObject, asyncObject); //asyncObj replace all
-            var func = function () {//group function to use queueKey
-                self.ConfigurarAntesRequest(options, asyncObject);
-                self.ConfigRequest("DELETE", asyncObject);
+        self["delete"] =
+            function (asyncObject, config) {
+                var options = self.init(config);
+                asyncObject = $.extend(true, options.asyncObject, asyncObject); //asyncObj replace all
+                var func = function () {//group function to use queueKey
+                    self.ConfigurarAntesRequest(options, asyncObject);
+                    self.ConfigRequest("DELETE", asyncObject);
+                };
+                self.ExecuteFunction(asyncObject, func);
             };
-            self.ExecuteFunction(asyncObject, func);
-        };
 
         self.getAjax =
-        function () {
-            //self.init();
-            return $.asyncRequest.defaults.ajax;
-        };
+            function () {
+                //self.init();
+                return $.asyncRequest.defaults.ajax;
+            };
 
         self.ExecuteFunction =
             function (asyncObject, func) {
@@ -295,7 +295,7 @@
             get: self.get,
             post: self.post,
             put: self.put,
-            'delete': self.delete,
+            'delete': self["delete"],
             getObjAsync: self.getObjAsync,
             getAjax: self.getAjax
         };
@@ -312,7 +312,6 @@
         asyncObject: {
             Url: null,
             Data: null,
-            //DataRequest: null, //Never use this field
             Cache: false,
             Containner: null,
             Msg: null,

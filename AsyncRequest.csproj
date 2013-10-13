@@ -141,6 +141,12 @@
     <Content Include="README.md" />
     <Content Include="CONTRIBUTING.md" />
     <Content Include="HowToUse.md" />
+    <Content Include="Scripts\AsyncRequest.min.js.map">
+      <DependentUpon>AsyncRequest.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\AsyncRequest.Queue.min.js.map">
+      <DependentUpon>AsyncRequest.Queue.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Index.html" />
     <Content Include="Scripts\AsyncRequest.js" />
@@ -227,6 +233,9 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>$(ProjectDir)GenerateMinification.exe $(ProjectDir)Scripts\AsyncRequest.js $(ProjectDir)Scripts\AsyncRequest.Notification.js $(ProjectDir)Scripts\AsyncRequest.Queue.js $(ProjectDir)Content\AsyncRequest.css</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
