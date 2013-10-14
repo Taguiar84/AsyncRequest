@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>AsyncRequest</id>
-        <version>0.3.0</version>
+        <version>0.3.1</version>
         <title>Async Request Helper</title>
         <authors>Thiago Aguiar</authors>
         <owners>Thiago Aguiar</owners>
@@ -19,8 +19,11 @@
     <files>
         <file src="Content\AsyncRequest-loading.gif" target="content\Content\AsyncRequest-loading.gif" />
         <file src="Content\AsyncRequest.css" target="content\Content\AsyncRequest.css" />
+		<file src="Content\AsyncRequest.css" target="content\Content\AsyncRequest.min.css" />
         <file src="Scripts\AsyncRequest.js" target="content\Scripts\AsyncRequest.js" />
+		<file src="Scripts\AsyncRequest.js" target="content\Scripts\AsyncRequest.min.js" />
         <file src="Scripts\AsyncRequest.Notification.js" target="content\Scripts\AsyncRequest.Notification.js" />
-        <file src="Scripts\AsyncRequest.Queue.js" target="content\Scripts\AsyncRequest.Queue.js" />
+		<file src="Scripts\AsyncRequest.Notification.js" target="content\Scripts\AsyncRequest.Notification.min.js" />
+        <file src="Scripts\AsyncRequest.Queue.js" target="content\Scripts\AsyncRequest.Queue.min.js" />
     </files>
 </package>
