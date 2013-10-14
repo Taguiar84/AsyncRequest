@@ -43,9 +43,9 @@
                 }
                 if (asyncObject.Containner !== false) {
                     if (asyncObject.Containner === null) {//BlockPage
-                        $.blockUI({ message: asyncObject.Msg });
+                        $.blockUI({ message: asyncObject.Msg, blockMsgClass: 'asyncRequestBlockMsg' });
                     } else {
-                        $(asyncObject.Containner).block({ message: asyncObject.Msg });
+                        $(asyncObject.Containner).block({ message: asyncObject.Msg, blockMsgClass: 'asyncRequestBlockMsg' });
                     }
                 }
 
