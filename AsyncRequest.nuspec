@@ -24,6 +24,7 @@
 		<file src="Scripts\AsyncRequest.js" target="content\Scripts\AsyncRequest.min.js" />
         <file src="Scripts\AsyncRequest.Notification.js" target="content\Scripts\AsyncRequest.Notification.js" />
 		<file src="Scripts\AsyncRequest.Notification.js" target="content\Scripts\AsyncRequest.Notification.min.js" />
-        <file src="Scripts\AsyncRequest.Queue.js" target="content\Scripts\AsyncRequest.Queue.min.js" />
+        <file src="Scripts\AsyncRequest.Queue.js" target="content\Scripts\AsyncRequest.Queue.js" />
+		<file src="Scripts\AsyncRequest.Queue.js" target="content\Scripts\AsyncRequest.Queue.min.js" />
     </files>
 </package>
