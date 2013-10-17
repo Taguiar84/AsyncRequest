@@ -6,6 +6,9 @@
 /// <reference path="../Scripts/AsyncRequest.Notification.js" />
 /// <reference path="../Scripts/AsyncRequest.Queue.js" />
 /// <reference path="../Scripts/AsyncRequest.js" />
+/// <reference path="../Scripts/noty/jquery.noty.js" />
+/// <reference path="../Scripts/noty/themes/default.js" />
+/// <reference path="../Scripts/noty/layouts/topRight.js" />
 
 
 describe("Verifica notify - Noty", function () {
