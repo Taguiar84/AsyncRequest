@@ -25,7 +25,7 @@ describe("Verifica notify - Jgrowl", function () {
     });
 
     afterEach(function () {        
-        //$('.jGrowl-notification:last').trigger('jGrowl.close');//Remove last
+        $('.jGrowl-notification').trigger('jGrowl.close');//Remove ALL, now CALL erroFunction too
     });
 
     it("Não chama no padrão, chamada do GET", function () {
@@ -122,11 +122,11 @@ describe("Verifica notify Erro - Jgrowl", function () {
                 params.error({ responseText: 'Sad Face' });
             }, 5);
         });
+        $('.jGrowl-notification').trigger('jGrowl.close');//Remove ALL, now CALL erroFunction too
     });
 
     afterEach(function () {
         $('.jGrowl-notification').trigger('jGrowl.close');//Remove ALL, now CALL erroFunction too
-        //$('.jGrowl-notification:last').trigger('jGrowl.close');//Remove last
     });
 
     it('Request com erro, deve ter leitura de response text como erro', function () {
@@ -155,11 +155,11 @@ describe("Verifica notify Erro JSON - Jgrowl", function () {
                 params.error({ responseText: "{\"errorMessage\":\"another\",\"StackTrace\":\"stack trace\", \"ExceptionMessage\": \"Exception Message\"}" });
             }, 5);
         });
+        $('.jGrowl-notification').trigger('jGrowl.close');//Remove ALL, now CALL erroFunction too
     });
 
     afterEach(function () {
         $('.jGrowl-notification').trigger('jGrowl.close');//Remove ALL, now CALL erroFunction too
-        //$('.jGrowl-notification:last').trigger('jGrowl.close');//Remove last
     });
 
     it('Request com erro, deve ter leitura de response text como erro', function () {

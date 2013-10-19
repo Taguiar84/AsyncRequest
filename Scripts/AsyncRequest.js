@@ -22,15 +22,28 @@
                     defaults.notification.notifyFunction = self.NotifyDefault;
                 }
                 return defaults;
-            };
+            };       
 
-        self.Unblock =
+        self.UnBlock =
             function (containner, funcBefore) {//moment is "before" / "after"
                 if (containner !== false) {
                     if (containner === null) { //BlockPage
-                        $.unblockUI({ onUnblock: funcBefore });
-                    } else {
-                        $(containner).unblock({ onUnblock: funcBefore });
+                        containner = window;
+                    }                    
+
+                    for (var i = 0; i < $.fn.asyncRequest.blockArray.length; i++) {
+                        var element = $.fn.asyncRequest.blockArray[i].element;
+                        if ($(element).is($(containner))) {
+                            if ($.fn.asyncRequest.blockArray[i].count > 1) {//Has another block
+                                if (funcBefore != null) {//Execute function, but no unblock
+                                    funcBefore();
+                                }
+                                $.fn.asyncRequest.blockArray[i].count--;
+                            } else {
+                                $(containner).unblock({ onUnblock: funcBefore });//unblock a execute function
+                                $.fn.asyncRequest.blockArray[i].count = 0;
+                            }
+                        }
                     }
                 }
             };
@@ -42,10 +55,31 @@
                     asyncObject.Msg = options.loadTextTemplate.replace("${msg}", options.loadText);
                 }
                 if (asyncObject.Containner !== false) {
-                    if (asyncObject.Containner === null) {//BlockPage
-                        $.blockUI({ message: asyncObject.Msg, blockMsgClass: 'asyncRequestBlockMsg' });
-                    } else {
-                        $(asyncObject.Containner).block({ message: asyncObject.Msg, blockMsgClass: 'asyncRequestBlockMsg' });
+                    var containner = asyncObject.Containner;
+                    if (containner === null) {
+                        containner = window;
+                    }
+                    var element = null;
+                    for (var i = 0; i < $.fn.asyncRequest.blockArray.length; i++) {
+                        var element = $.fn.asyncRequest.blockArray[i].element;
+                        if ($(element).is($(containner))) {
+                            if ($.fn.asyncRequest.blockArray[i].count == 0) {
+                                $(containner).block({ message: asyncObject.Msg, blockMsgClass: 'asyncRequestBlockMsg' });
+                            }
+                            $.fn.asyncRequest.blockArray[i].count++;
+                            break;
+                        }
+                        else {
+                            element = null;
+                        }
+                    }
+                    if (element == null) {//Ainda não existe na lista
+                        $.fn.asyncRequest.blockArray.push(
+                            {
+                                element: containner,
+                                count: 1
+                            });
+                        $(containner).block({ message: asyncObject.Msg, blockMsgClass: 'asyncRequestBlockMsg' });
                     }
                 }
 
@@ -69,13 +103,13 @@
                                     func(data);
                                 };
                             }
-                            self.Unblock(asyncObject.Containner, funcBefore);
+                            self.UnBlock(asyncObject.Containner, funcBefore);
 
                         } else {
                             if (func !== null) {
                                 func(data);
                             }
-                            self.Unblock(asyncObject.Containner);
+                            self.UnBlock(asyncObject.Containner);
                         }
                         self.ExecuteNotify(data, options, requestType, 'success');
                     };
@@ -118,13 +152,13 @@
                                     funcErro(data);
                                 };
                             }
-                            self.Unblock(asyncObject.Containner, funcBefore);
+                            self.UnBlock(asyncObject.Containner, funcBefore);
 
                         } else {
                             if (funcErro !== null) {
                                 funcErro(data);
                             }
-                            self.Unblock(asyncObject.Containner);
+                            self.UnBlock(asyncObject.Containner);
                         }
                         self.ExecuteNotify(data, options, requestType, 'erro');
                     };
@@ -303,6 +337,8 @@
     //$.fn.asyncRequest = new asyncRequest();
 
     $.asyncRequest = $.fn.asyncRequest;
+
+    $.fn.asyncRequest.blockArray = [];
 
     $.asyncRequest.defaults = {
         ajax: $.ajax,

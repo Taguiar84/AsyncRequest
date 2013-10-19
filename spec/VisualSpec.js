@@ -57,13 +57,13 @@ describe("Block Element", function () {
     it("testa a remoção do block antes executar o evento de sucesso", function () {
         objRequest.UnblockMoment = "before";
         var bloqueado = false;
-        runs(function () {
-            objRequest.SuccessFunction = function (data) {
-                bloqueado = $.find(".blockUI").length == 0;
-            }
+        objRequest.SuccessFunction = function (data) {
+            bloqueado = $.find(".blockUI").length == 0;
+        }
+        runs(function () {           
             request.get(objRequest);
         });
-        waits(timeoutRequest + 550);
+        waits(timeoutRequest + 600);
 
         runs(function () {
             expect(bloqueado).toBe(true);
@@ -114,7 +114,7 @@ describe("Block Element with error", function () {
             }
             request.get(objRequest);
         });
-        waits(timeoutRequest + 550);
+        waits(timeoutRequest + 600);
 
         runs(function () {
             expect(bloqueado).toBe(true);
