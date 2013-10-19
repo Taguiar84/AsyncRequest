@@ -95,4 +95,38 @@ describe("AsyncRequest Request", function () {
         expect(callbackErro).toHaveBeenCalledWith("Sad Face");
     });
 
+
+    
 });
+
+
+describe("AsyncRequest Timeout", function () {
+    var objRequest;
+    var timeOutRequest = 30;
+    beforeEach(function () {
+        objRequest = $.asyncRequest.getObjAsync();
+        //objRequest = request.getObjAsync();
+        spyOn($, "ajax").andCallFake(function (params) {
+            setTimeout(function () { params.success('opa'); params.complete("Be Nice!!!"); }, timeOutRequest);
+
+        });        
+    });
+
+    it("Timeout teste", function () {
+        objRequest.Timeout = 15;//change timeout
+        runs(function () {
+            $.asyncRequest.get(objRequest);
+        });
+
+        waits(10 * timeOutRequest);
+
+        runs(function () {
+            expect(true).toBe(true);
+        });
+
+    });
+
+
+});
+
+

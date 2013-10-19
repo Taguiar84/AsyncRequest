@@ -64,7 +64,7 @@
                         var element = $.fn.asyncRequest.blockArray[i].element;
                         if ($(element).is($(containner))) {
                             if ($.fn.asyncRequest.blockArray[i].count == 0) {
-                                $(containner).block({ message: asyncObject.Msg, blockMsgClass: 'asyncRequestBlockMsg' });
+                                $(containner).block({ message: asyncObject.Msg, blockMsgClass: options.cssBlockUI });
                             }
                             $.fn.asyncRequest.blockArray[i].count++;
                             break;
@@ -79,7 +79,7 @@
                                 element: containner,
                                 count: 1
                             });
-                        $(containner).block({ message: asyncObject.Msg, blockMsgClass: 'asyncRequestBlockMsg' });
+                        $(containner).block({ message: asyncObject.Msg, blockMsgClass: options.cssBlockUI });
                     }
                 }
 
@@ -178,6 +178,33 @@
         self.ConfigRequest =
             function (type, asyncObject) {
                 $.ajax({
+                    //xhrFields: {
+                    //    onprogress: function (e) {
+                    //        if (e.lengthComputable) {
+                    //            console.log(e.loaded / e.total * 100 + '%');
+                    //        }
+                    //    }
+                    //},
+                    //xhr: function () {
+                    //    var xhr = new window.XMLHttpRequest();
+                    //    //Upload progress
+                    //    xhr.upload.addEventListener("progress", function (evt) {
+                    //        if (evt.lengthComputable) {
+                    //            var percentComplete = evt.loaded / evt.total;
+                    //            //Do something with upload progress
+                    //            console.log(percentComplete);
+                    //        }
+                    //    }, false);
+                    //    //Download progress
+                    //    xhr.addEventListener("progress", function (evt) {
+                    //        if (evt.lengthComputable) {
+                    //            var percentComplete = evt.loaded / evt.total;
+                    //            //Do something with download progress
+                    //            console.log(percentComplete);
+                    //        }
+                    //    }, false);
+                    //    return xhr;
+                    //},
                     type: type,
                     url: asyncObject.Url,
                     data: asyncObject.DataRequest,
@@ -185,7 +212,8 @@
                     success: asyncObject.SuccessFunction,
                     error: asyncObject.ErrorFunction,
                     complete: asyncObject.CompleteFunction,
-                    dataType: asyncObject.DataType
+                    dataType: asyncObject.DataType,
+                    timeout: asyncObject.Timeout
                 });
             };
 
@@ -344,6 +372,7 @@
         ajax: $.ajax,
         loadText: "Carregando..",
         loadTextTemplate: "<div class='MenssagemLoad'><h4>${msg}</h4></div>",
+        cssBlockUI: "asyncRequestBlockMsg",
         queueUtil: new asyncRequest_Queue(),
         asyncObject: {
             Url: null,
@@ -355,6 +384,7 @@
             ContentType: "application/json; charset=utf-8",
             DataType: "json",
             UnblockMoment: "after",
+            Timeout: 0,
             //function
             SuccessFunction: null,
             ErrorFunction: null,

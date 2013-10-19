@@ -79,7 +79,8 @@
 | Property          |  Default											|  Description														|
 |------------------|--------------------------------------------------|------------------------------------------------------------------|
 |loadText			|"Carregando.." (Loading in portugues)				|Display Mensage while request	is made								|
-|loadTextTemplate	|[See in code, very big to write here]	|template used with blockUI									|
+|loadTextTemplate	|[See in code, very big to write here]				|template used with blockUI											|
+|cssBlockUI			|"asyncRequestBlockMsg"								|CssClass used in blockElement										|
 
 ### Configuration ObjRequest [$.getObjAsync]
 | Property          |  Default                             |  Description														| Values		|
@@ -95,6 +96,7 @@
 |ContentType		|"application/json; charset=utf-8"		|Define type for send Data, see Data property						|				|
 |DataType			|"json"									|Define type for return data										|				|
 |UnblockMoment		|"after"								|when unblock container												|after/before	|
+|Timeout			|0 (disable)							|Timeout event														|				|
 
 
 ## Anothers setups, used with Default Options Jquery 
@@ -136,6 +138,7 @@
             ContentType: "application/json; charset=utf-8",
             DataType: "json",
 			UnblockMoment: "after",
+			Timeout: 0,
             //function
             SuccessFunction: null,
             ErrorFunction: null,
