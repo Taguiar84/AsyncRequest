@@ -2,15 +2,15 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>AsyncRequest</id>
-        <version>0.3.1.1</version>
-        <title>Async Request Helper</title>
+        <version>0.3.3</version>
+        <title>AsyncRequest</title>
         <authors>Thiago Aguiar</authors>
         <owners>Thiago Aguiar</owners>
         <licenseUrl>https://raw.github.com/Taguiar84/AsyncRequest/master/LICENSE</licenseUrl>
         <projectUrl>https://github.com/Taguiar84/AsyncRequest</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>jQuery plugin for make request with visual feedback, like blocked element, notify result, yet make queue and parallel queue for you requests.</description>
-        <summary>jQuery plugin for make request with visual feedback, like blocked element, notify result, yet make queue and parallel queue for you requests.</summary>
+        <description>jQuery plugin to make request with visual feedback, blocked element, result notification, queue or parallel queues for you requests.</description>
+        <summary>jQuery plugin to make request with visual feedback, blocked element, result notification, queue or parallel queues for you requests.</summary>
         <dependencies>
             <dependency id="jQuery" version="2.0.3" />
             <dependency id="jQuery.BlockUI" version="2.65" />

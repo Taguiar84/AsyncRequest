@@ -1,14 +1,14 @@
 {
     "name": "AsyncRequest",
     "title": "jQuery AsyncRequest",
-    "description": "jQuery plugin for make request with visual feedback, blocked element, result notification, queue or parallel queues for you requests.",
+    "description": "jQuery plugin to make request with visual feedback, blocked element, result notification, queue or parallel queues for you requests.",
     "keywords": [
         "AsyncRequest",        
 		"BlockUI",
 		"JGrowl",
 		"Notify"
     ],
-    "version": "0.3.2",
+    "version": "0.3.3",
     "author": {
         "name": "Thiago Aguiar",
         "url": "https://github.com/Taguiar84/AsyncRequest/AUTHORS.txt"
