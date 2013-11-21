@@ -59,7 +59,38 @@ $.asyncRequest.delete() //ajax request with Delete
                 <h4>Step 2. block page (optional)</h4>
                 <p>When you make ajax request, we block element or page using <a href="http://www.malsup.com/jquery/block/">BlockUI plugin</a></p>
 
-                , step 3. Success/Error result. step 4. Feed back result
+<pre id="blockPrecode"><code>$.asyncRequest.get({Containner: null}) //default value, block all Page
+$.asyncRequest.get({Containner: false}) //disable block
+$.asyncRequest.get({Containner: '#blockPrecode'}) //block element
+$.asyncRequest.get({Msg: 'Custom Message'}) //custom message
+</code></pre>
+                <button type="button" class="btn btn-default" onclick="$.asyncRequest.get({ Containner: null })">Default</button>
+                <button type="button" class="btn btn-primary" onclick="$.asyncRequest.get({ Containner: false })">Disable Block Containner</button>
+                <button type="button" class="btn btn-success" onclick="$.asyncRequest.get({ Containner: '#blockPrecode' })">Block only element</button>
+                <button type="button" class="btn btn-danger" onclick="$.asyncRequest.get({ Msg: 'Custom Message' })">Custom Message</button>
+
+                <br />
+                <br />
+                <h4>Step 3. Success/Error/Complete result</h4>
+                <p>after request we call "result" function, akak Success or Error</p>
+<pre><code>//define success function
+$.asyncRequest.get({ Url: 'XXXX', SuccessFunction: function () { } }) 
+//define success and error function, but only succes will fire
+$.asyncRequest.get({ Url: 'XXXX', SuccessFunction: function () { }
+        , ErrorFunction : function() { } }) 
+//error will fire
+$.asyncRequest.post({ Url: 'XXXX', SuccessFunction: function () { }
+    , ErrorFunction : function() { } }) 
+//define complete function
+$.asyncRequest.get({ Url: 'XXXX', SuccessFunction: function () { }
+    , CompleteFunction: function () { } }) 
+</code></pre>
+                <button type="button" class="btn btn-default" onclick="$.asyncRequest.get({ Url: 'http://headers.jsontest.com/', SuccessFunction: function () { alert('Happy Face!!!'); } })">Success result</button>
+                <button type="button" class="btn btn-primary" onclick="$.asyncRequest.get({ Url: 'http://headers.jsontest.com/', SuccessFunction: function () { alert('Happy Face!!!'); }, ErrorFunction: function () { alert('Sad Face!!!'); } })">Success result, but Erro Result define</button>
+                <button type="button" class="btn btn-success" onclick="$.asyncRequest.post({ Url: 'http://headers.jsontest.com/', SuccessFunction: function () { alert('Happy Face!!!'); }, ErrorFunction: function () { alert('Sad Face!!!'); } })">Error result</button>
+                <button type="button" class="btn btn-danger" onclick="$.asyncRequest.get({ Url: 'http://headers.jsontest.com/', SuccessFunction: function () { alert('Happy Face!!!'); }, CompleteFunction: function () { alert('Complete Function'); } })">Complete Function</button>
+
+                , . step 4. Feed back result
 
 
 <pre><code>$ cd your_repo_root/repo_name
@@ -113,6 +144,7 @@ $ git checkout gh-pages
 
     <script type="text/javascript" src="javascripts/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="javascripts/jasmine/jasmine.js"></script>
+    <script type="text/javascript" src="javascripts/jasmine/jasmine-html.js"></script>
     <script type="text/javascript" src="javascripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="javascripts/jquery.blockUI.min.js"></script>
     <script type="text/javascript" src="javascripts/jquery.jgrowl.min.js"></script>
