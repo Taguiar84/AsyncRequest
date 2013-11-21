@@ -87,7 +87,7 @@
 |------------------|--------------------------------------|------------------------------------------------------------------|---------------
 |Url				|null									|Url to request														|				|
 |Data				|null (optional)						|Object javascript sent to Async Request							|				|
-|SuccesFunction		|null (optional)						|Function called after success response								|				|
+|SuccessFunction	|null (optional)						|Function called after success response								|				|
 |ErrorFunction		|null (optional)						|Function called after error response								|				|
 |CompleteFunction	|null (optional)						|Function called when finished request with success or error		|				|
 |Containner			|null (optional)						|Html element to block, null = Block of page, false = disable		|				|
