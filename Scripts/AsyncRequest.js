@@ -177,7 +177,7 @@
 
         self.ConfigRequest =
             function (type, asyncObject) {
-                $.ajax({
+                var xhr = $.ajax({
                     //xhrFields: {
                     //    onprogress: function (e) {
                     //        if (e.lengthComputable) {
@@ -215,6 +215,7 @@
                     dataType: asyncObject.DataType,
                     timeout: asyncObject.Timeout
                 });
+                return xhr;
             };
 
         self.ExecuteNotify =
@@ -288,9 +289,9 @@
                 asyncObject = $.extend(true, options.asyncObject, asyncObject); //asyncObj replace all
                 var func = function () {//group function to use queueKey
                     self.ConfigurarAntesRequest(options, asyncObject, "GET");
-                    self.ConfigRequest("GET", asyncObject);
+                    return self.ConfigRequest("GET", asyncObject);
                 };
-                self.ExecuteFunction(asyncObject, func);
+                return self.ExecuteFunction(asyncObject, func);
             };
 
         self.post =
@@ -299,9 +300,9 @@
                 asyncObject = $.extend(true, options.asyncObject, asyncObject); //asyncObj replace all
                 var func = function () {//group function to use queueKey
                     self.ConfigurarAntesRequest(options, asyncObject, "POST");
-                    self.ConfigRequest("POST", asyncObject);
+                    return self.ConfigRequest("POST", asyncObject);
                 };
-                self.ExecuteFunction(asyncObject, func);
+                return self.ExecuteFunction(asyncObject, func);
             };
 
         self.put =
@@ -310,9 +311,9 @@
                 asyncObject = $.extend(true, options.asyncObject, asyncObject); //asyncObj replace all
                 var func = function () {//group function to use queueKey
                     self.ConfigurarAntesRequest(options, asyncObject, "UPDATE");
-                    self.ConfigRequest("UPDATE", asyncObject);
+                    return self.ConfigRequest("UPDATE", asyncObject);
                 };
-                self.ExecuteFunction(asyncObject, func);
+                return self.ExecuteFunction(asyncObject, func);
             };
 
         self["delete"] =
@@ -321,9 +322,9 @@
                 asyncObject = $.extend(true, options.asyncObject, asyncObject); //asyncObj replace all
                 var func = function () {//group function to use queueKey
                     self.ConfigurarAntesRequest(options, asyncObject);
-                    self.ConfigRequest("DELETE", asyncObject);
+                    return self.ConfigRequest("DELETE", asyncObject);
                 };
-                self.ExecuteFunction(asyncObject, func);
+                return self.ExecuteFunction(asyncObject, func);
             };
 
         self.getAjax =
@@ -341,14 +342,14 @@
                 if (key !== null) {//Put in Queue
                     var Objqueue = queueUtil.getQueue(key);
                     Objqueue.queue.push(function () {
-                        func();
+                        return func();
                     });
                     if (!Objqueue.Executing) {
                         Objqueue.Executing = true;
                         Objqueue.queue.execute();
                     }
                 } else { //No Queue, execute!!
-                    func();
+                    return func();
                 }
             };
 
