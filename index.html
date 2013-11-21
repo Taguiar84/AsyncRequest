@@ -72,7 +72,7 @@ $.asyncRequest.get({Msg: 'Custom Message'}) //custom message
                 <br />
                 <br />
                 <h4>Step 3. Success/Error/Complete result</h4>
-                <p>after request we call "result" function, akak Success or Error</p>
+                <p>after request we call "result" function, aka Success or Error</p>
 <pre><code>//define success function
 $.asyncRequest.get({ Url: 'XXXX', SuccessFunction: function () { } }) 
 //define success and error function, but only succes will fire
@@ -90,27 +90,26 @@ $.asyncRequest.get({ Url: 'XXXX', SuccessFunction: function () { }
                 <button type="button" class="btn btn-success" onclick="$.asyncRequest.post({ Url: 'http://headers.jsontest.com/', SuccessFunction: function () { alert('Happy Face!!!'); }, ErrorFunction: function () { alert('Sad Face!!!'); } })">Error result</button>
                 <button type="button" class="btn btn-danger" onclick="$.asyncRequest.get({ Url: 'http://headers.jsontest.com/', SuccessFunction: function () { alert('Happy Face!!!'); }, CompleteFunction: function () { alert('Complete Function'); } })">Complete Function</button>
 
-                , . step 4. Feed back result
 
+                <br />
+                <br />
+                <h4>Step 4. Feed back result</h4>
+                <p>After a success/error request and all process execute will be nice show to user a feddback. to show notification we use <a href="https://github.com/stanlemon/jGrowl">jGrowl plugin</a></p>
+                <p style="color: red">in Get request we dont show notification by default, see notification options <a href="https://github.com/Taguiar84/AsyncRequest/blob/master/HowToUse.md#notification-options">page</a> </p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<pre><code>//success notification
+$.asyncRequest.post({ Url: 'http://headers.jsontest.com/' })
+//error notification
+$.asyncRequest.post({ Url: 'xxx.com.br' })
+//disable notification
+$.asyncRequest.post({ Url: 'http://headers.jsontest.com/'}, {notification: {notifyFunction: false} }) 
 </code></pre>
 
-                <p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+                <button type="button" class="btn btn-default" onclick="$.asyncRequest.post({ Url: 'http://headers.jsontest.com/' })">Success feedback</button>
+                <button type="button" class="btn btn-primary" onclick="$.asyncRequest.post({ Url: 'xxx.com.br' }) ">Error feedback</button>
+                <button type="button" class="btn btn-success" onclick="$.asyncRequest.post({ Url: 'http://headers.jsontest.com/' }, { notification: { notifyFunction: false } }) ">Disable notify</button>
 
-                <h3>
-                    <a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates
-                </h3>
 
-                <p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-                <h3>
-                    <a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?
-                </h3>
-
-                <p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
 
                 <h3>
                     <a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors
@@ -122,18 +121,18 @@ $ git checkout gh-pages
                     <a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact
                 </h3>
 
-                <p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+                <p>Having trouble with Pages? Check out the documentation at <a href="https://github.com/Taguiar84/AsyncRequest/blob/master/HowToUse.md">https://github.com/Taguiar84/AsyncRequest/blob/master/HowToUse.md</a> and we’ll help you sort it out.</p>
             </section>
 
             <aside id="sidebar">
-                <a href="https://github.com/Taguiar84/AsyncRequest/zipball/master" class="button">
+                <a href="https://github.com/Taguiar84/AsyncRequest/blob/master/Version/latest/AsyncRequest.zip?raw=true" class="button">
                     <small>Download</small>
                     .zip file
                 </a>
-                <a href="https://github.com/Taguiar84/AsyncRequest/tarball/master" class="button">
-                    <small>Download</small>
-                    .tar.gz file
-                </a>
+                <a href="https://www.nuget.org/packages/AsyncRequest/" class="button">
+                    <small>Link</small>
+                    Nuget
+                </a>               
 
                 <p class="repo-owner"><a href="https://github.com/Taguiar84/AsyncRequest"></a> is maintained by <a href="https://github.com/Taguiar84">Taguiar84</a>.</p>
 
