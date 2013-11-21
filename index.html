@@ -44,16 +44,18 @@
 
                 <h4>Step 1. Request</h4>
                 <p>To request by plugins, you can use webApi like</p>
-<pre><code>$.asyncRequest.get //ajax request with Get
-$.asyncRequest.post //ajax request with Post
-$.asyncRequest.put //ajax request with Put
-$.asyncRequest.delete //ajax request with Delete
+<pre><code>$.asyncRequest.get() //ajax request with Get
+$.asyncRequest.post() //ajax request with Post
+$.asyncRequest.put() //ajax request with Put
+$.asyncRequest.delete() //ajax request with Delete
 </code></pre>
-                <button type="button" class="btn btn-default">Get</button>
-                <button type="button" class="btn">Post</button>
-                <button type="button" class="btn">Put</button>
-                <button type="button" class="btn">Delete</button>
+                <button type="button" class="btn btn-default" onclick="$.asyncRequest.get()">Get</button>
+                <button type="button" class="btn btn-primary" onclick="$.asyncRequest.post()">Post</button>
+                <button type="button" class="btn btn-success" onclick="$.asyncRequest.put()">Put</button>
+                <button type="button" class="btn btn-danger" onclick="$.asyncRequest.delete()">Delete</button>
 
+                <br />
+                <br />
                 <h4>Step 2. block page (optional)</h4>
                 <p>When you make ajax request, we block element or page using <a href="http://www.malsup.com/jquery/block/">BlockUI plugin</a></p>
 
@@ -110,6 +112,7 @@ $ git checkout gh-pages
     </div>
 
     <script type="text/javascript" src="javascripts/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="javascripts/jasmine/jasmine.js"></script>
     <script type="text/javascript" src="javascripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="javascripts/jquery.blockUI.min.js"></script>
     <script type="text/javascript" src="javascripts/jquery.jgrowl.min.js"></script>
