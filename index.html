@@ -121,14 +121,14 @@ $.asyncRequest.get({ Url: 'XXXX', SuccessFunction: function () { }
 <pre><code>//success notification
 $.asyncRequest.post({ Url: 'http://headers.jsontest.com/' })
 //error notification
-$.asyncRequest.post({ Url: 'xxx.com.br' })
+$.asyncRequest.post({ Url: 'http://xxx.com' })
 //disable notification
 $.asyncRequest.post({ Url: 'http://headers.jsontest.com/'}
     , {notification: {notifyFunction: false} }) 
 </code></pre>
 
                 <button type="button" class="btn btn-default" onclick="$.asyncRequest.post({ Url: 'http://headers.jsontest.com/' })">Success feedback</button>
-                <button type="button" class="btn btn-primary" onclick="$.asyncRequest.post({ Url: 'http://xxx.com.br' }) ">Error feedback</button>
+                <button type="button" class="btn btn-primary" onclick="$.asyncRequest.post({ Url: 'http://xxx.com' }) ">Error feedback</button>
                 <button type="button" class="btn btn-success" onclick="$.asyncRequest.post({ Url: 'http://headers.jsontest.com/' }, { notification: { notifyFunction: false } }) ">Disable notify</button>
 
 
@@ -168,10 +168,11 @@ $.asyncRequest.post({ Url: 'http://headers.jsontest.com/'}
     <script type="text/javascript" src="javascripts/jasmine/jasmine-html.js"></script>
     <script type="text/javascript" src="javascripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="javascripts/jquery.blockUI.min.js"></script>
-    <script type="text/javascript" src="javascripts/jquery.jgrowl.min.js"></script>
+    <script type="text/javascript" src="javascripts/jquery.jgrowl.min.js"></script>    
     <script type="text/javascript" src="javascripts/AsyncRequest.Notification.min.js"></script>
     <script type="text/javascript" src="javascripts/AsyncRequest.Queue.min.js"></script>
     <script type="text/javascript" src="javascripts/AsyncRequest.min.js"></script>
+    <script type="text/javascript" src="javascripts/Globalization/AsyncRequest.en-US.js"></script>
     <script type="text/javascript" src="javascripts/main.js"></script>
 
 </body>
