@@ -39,7 +39,7 @@
                 </h3>
 
                 <p>
-                    This is very simple plugin, we only means in join all steps of a asyncrequest (ajax request).
+                    This is very simple plugin, we just  gathered all steps of a asyncrequest (ajax request).
                 </p>
 
                 <h4>Step 1. Request</h4>
@@ -53,6 +53,27 @@ $.asyncRequest.delete() //ajax request with Delete
                 <button type="button" class="btn btn-primary" onclick="$.asyncRequest.post()">Post</button>
                 <button type="button" class="btn btn-success" onclick="$.asyncRequest.put()">Put</button>
                 <button type="button" class="btn btn-danger" onclick="$.asyncRequest.delete()">Delete</button>
+                <br />
+                <br />
+                <p>All parameters to request see <a href="https://github.com/Taguiar84/AsyncRequest/blob/master/HowToUse.md#options-to-use">Options to use</a></p>
+<pre><code>var dataRequest = {};//Object with information to request
+var options = {};extra behavior, like notification and block....
+$.asyncRequest.get(dataRequest, options)
+//Sample
+request.post({
+        Url: 'urlRequest'
+        , Data: {}//object to send
+        , ContentType: "application/json; charset=utf-8"
+        , DataType: "json"
+    }
+    , { 
+    notification: { 
+        notificationSuccessMsgDefault: "Custom Mensage"
+        , notificationErrorMsgDefault: "Custom Mensage error" 
+    }
+});
+</code></pre>
+
 
                 <br />
                 <br />
