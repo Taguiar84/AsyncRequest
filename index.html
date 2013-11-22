@@ -107,7 +107,7 @@ $.asyncRequest.get({ Url: 'XXXX', SuccessFunction: function () { }
     , CompleteFunction: function () { } }) 
 </code></pre>
                 <button type="button" class="btn btn-default" onclick="$.asyncRequest.get({ Url: 'http://headers.jsontest.com/', SuccessFunction: function () { alert('Happy Face!!!'); } })">Success result</button>
-                <button type="button" class="btn btn-primary" onclick="$.asyncRequest.get({ Url: 'http://headers.jsontest.com/', SuccessFunction: function () { alert('Happy Face!!!'); }, ErrorFunction: function () { alert('Sad Face!!!'); } })">Success result, but Erro Result define</button>
+                <button type="button" class="btn btn-primary" onclick="$.asyncRequest.get({ Url: 'http://headers.jsontest.com/', SuccessFunction: function () { alert('Happy Face!!!'); }, ErrorFunction: function () { alert('Sad Face!!!'); } })">Success result, but Error Result define</button>
                 <button type="button" class="btn btn-success" onclick="$.asyncRequest.post({ Url: 'http://headers.jsontest.com/', SuccessFunction: function () { alert('Happy Face!!!'); }, ErrorFunction: function () { alert('Sad Face!!!'); } })">Error result</button>
                 <button type="button" class="btn btn-danger" onclick="$.asyncRequest.get({ Url: 'http://headers.jsontest.com/', SuccessFunction: function () { alert('Happy Face!!!'); }, CompleteFunction: function () { alert('Complete Function'); } })">Complete Function</button>
 
@@ -128,7 +128,7 @@ $.asyncRequest.post({ Url: 'http://headers.jsontest.com/'}
 </code></pre>
 
                 <button type="button" class="btn btn-default" onclick="$.asyncRequest.post({ Url: 'http://headers.jsontest.com/' })">Success feedback</button>
-                <button type="button" class="btn btn-primary" onclick="$.asyncRequest.post({ Url: 'xxx.com.br' }) ">Error feedback</button>
+                <button type="button" class="btn btn-primary" onclick="$.asyncRequest.post({ Url: 'http://xxx.com.br' }) ">Error feedback</button>
                 <button type="button" class="btn btn-success" onclick="$.asyncRequest.post({ Url: 'http://headers.jsontest.com/' }, { notification: { notifyFunction: false } }) ">Disable notify</button>
 
 
