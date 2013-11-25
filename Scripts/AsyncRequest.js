@@ -310,8 +310,8 @@
                 var options = self.init(config);
                 asyncObject = $.extend(true, options.asyncObject, asyncObject); //asyncObj replace all
                 var func = function () {//group function to use queueKey
-                    self.ConfigurarAntesRequest(options, asyncObject, "UPDATE");
-                    return self.ConfigRequest("UPDATE", asyncObject);
+                    self.ConfigurarAntesRequest(options, asyncObject, "PUT");
+                    return self.ConfigRequest("PUT", asyncObject);
                 };
                 return self.ExecuteFunction(asyncObject, func);
             };
@@ -393,7 +393,7 @@
         },
         notification: {
             notifyFunction: null,
-            notifyCommandType: ['POST', 'UPDATE', 'DELETE'],
+            notifyCommandType: ['POST', 'PUT', 'DELETE'],
             notifyTemplate: "<div><div class='notificationTemplate'><p></p><p class='notificationTemplateMsg'>${msg}</p></div></div>",
             notifyTemplateErro: "<div><div class='notificationTemplate'><p></p><p class='notificationTemplateMsg'>${msg}</p><br/><ul class='msgStack'><li><a onclick=\"$(this).parent().parent().find('li:last').toggle();\">${fullErroText}</a></li><li>${msgStack}</li></ul></div></div>",
             notificationSuccessMsgDefault: 'Operação realizada com sucesso',

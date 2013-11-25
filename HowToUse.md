@@ -110,7 +110,7 @@
 | Property          |  Default												|  Description														|
 |------------------|------------------------------------------------------|-----------------------------------------------------------------		|
 |notifyFunction					|null (optional)							|function of base to notify about request, null = use default values and templates, false = disable	|
-|notifyCommandType				|['POST', 'UPDATE', 'DELETE']				|type of request with  notification, only [GET] don't show notification by default	|
+|notifyCommandType				|['POST', 'PUT', 'DELETE']				|type of request with  notification, only [GET] don't show notification by default	|
 |notifyTemplate					|[See in code, very big to write here]		|Template used in default notify, used with DEFAULT notifyFunction		|
 |notifyTemplateErro				|[See in code, very big to write here]		|Template used in default notify, used with DEFAULT notifyFunction		|
 |notificationSuccessMsgDefault	|'Operação realizada com sucesso'			|Text template used in default notify, used with DEFAULT notifyFunction			|
@@ -146,7 +146,7 @@
         },
         notification: {
             notifyFunction: null,
-            notifyCommandType: ['POST', 'UPDATE', 'DELETE'],
+            notifyCommandType: ['POST', 'PUT', 'DELETE'],
             notifyTemplate: [HTML TEMPLATE],
             notifyTemplateErro: [HTML TEMPLATE],
             notificationSuccessMsgDefault: 'Operação realizada com sucesso',
