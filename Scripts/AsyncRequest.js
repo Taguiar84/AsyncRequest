@@ -22,14 +22,14 @@
                     defaults.notification.notifyFunction = self.NotifyDefault;
                 }
                 return defaults;
-            };       
+            };
 
         self.UnBlock =
             function (containner, funcBefore) {//moment is "before" / "after"
                 if (containner !== false) {
                     if (containner === null) { //BlockPage
                         containner = window;
-                    }                    
+                    }
 
                     for (var i = 0; i < $.fn.asyncRequest.blockArray.length; i++) {
                         var element = $.fn.asyncRequest.blockArray[i].element;
@@ -246,8 +246,13 @@
                     case "erro":
                         try {
                             var jsonErro = JSON.parse(data.responseText);
-                            msg = jsonErro.errorMessage;
-                            stack = jsonErro.ExceptionMessage + "<br/>" + jsonErro.StackTrace;
+                            if (typeof jsonErro == "string") {
+                                msg = jsonErro;
+                            }
+                            else {
+                                msg = jsonErro.errorMessage;
+                                stack = jsonErro.ExceptionMessage + "<br/>" + jsonErro.StackTrace;
+                            }
                         } catch (exception) {//Erro not JSON, but has value
                             if (data.responseText !== null && data.responseText !== "") {
                                 msg = data.responseText;
@@ -321,7 +326,7 @@
                 var options = self.init(config);
                 asyncObject = $.extend(true, options.asyncObject, asyncObject); //asyncObj replace all
                 var func = function () {//group function to use queueKey
-                    self.ConfigurarAntesRequest(options, asyncObject);
+                    self.ConfigurarAntesRequest(options, asyncObject, "DELETE");
                     return self.ConfigRequest("DELETE", asyncObject);
                 };
                 return self.ExecuteFunction(asyncObject, func);

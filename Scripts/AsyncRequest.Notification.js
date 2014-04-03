@@ -6,6 +6,9 @@
         template = template.replace("${fullErroText}", fullErroText);
         template = template.replace("${msg}", msg);
         template = template.replace("${msgStack}", stack);
+        if (stack == null) {
+            template = template.replace("class='msgStack'", "class='msgStack hidden'")
+        }
         return template;
     }
 
