@@ -239,31 +239,41 @@
                     notification = new asyncRequest_Notification_Notfy(config.notification);
                 }
 
-                switch (type) {
-                    case "success":
-                        notification.successNotify();
-                        break;
-                    case "erro":
-                        try {
-                            var jsonErro = JSON.parse(data.responseText);
-                            if (typeof jsonErro == "string") {
-                                msg = jsonErro;
+                try {
+                    var jsonErro = JSON.parse(data.responseText);
+                    if (typeof jsonErro == "string") {
+                        msg = jsonErro;
+                    }
+                    else {
+                        msg = jsonErro.errorMessage;
+                        if (jsonErro.ExceptionMessage + ! null)
+                            stack = jsonErro.ExceptionMessage;
+                        if (jsonErro.StackTrace != null) {
+                            if (stack == null) {
+                                stack = jsonErro.StackTrace;
                             }
                             else {
-                                msg = jsonErro.errorMessage;
-                                stack = jsonErro.ExceptionMessage + "<br/>" + jsonErro.StackTrace;
-                            }
-                        } catch (exception) {//Erro not JSON, but has value
-                            if (data.responseText !== null && data.responseText !== "") {
-                                msg = data.responseText;
-                            } else {
-                                msg = data.Message === null ? data.statusText : data.Message;
+                                stack += "<br/>" + jsonErro.StackTrace;
                             }
                         }
+                    }
+                } catch (exception) {//Erro not JSON, but has value
+                    if (data.responseText !== null && data.responseText !== "") {
+                        msg = data.responseText;
+                    } else {
+                        msg = data.Message === null ? data.statusText : data.Message;
+                    }
+                }
+                switch (type) {
+                    case "success":
+                        notification.successNotify(msg);
+                        break;
+                    case "erro":
+
                         notification.erroNotify(msg, stack, true);
                         break;
                     case "info":
-                        notification.notifyInfo();
+                        notification.notifyInfo(msg);
                         break;
                 }
             };
@@ -358,6 +368,37 @@
                 }
             };
 
+        self.NotifyMsg =
+            function (msg, exceptionMessage) {
+                var info = {
+                    errorMessage: msg || null,
+                    ExceptionMessage: exceptionMessage || null,
+                    StackTrace: null
+                };
+                return {
+                    responseText: JSON.stringify(info)
+                }
+            }
+
+        self.NotifySuccess =
+            function (msg) {
+                var options = self.init();
+                var data = self.NotifyMsg(msg)
+                self.NotifyDefault('success', data, options);
+            }
+        self.NotifyErro =
+            function (msg, stack) {
+                var options = self.init();
+                var data = self.NotifyMsg(msg, stack)
+                self.NotifyDefault('erro', data, options);
+            }
+        self.NotifyInfo =
+            function (msg) {
+                var options = self.init();
+                var data = self.NotifyMsg(msg)
+                self.NotifyDefault('info', data, options);
+            }
+
         return {
             getAsync: self.getAsync,
             get: self.get,
@@ -365,7 +406,10 @@
             put: self.put,
             'delete': self["delete"],
             getObjAsync: self.getObjAsync,
-            getAjax: self.getAjax
+            getAjax: self.getAjax,
+            notifySuccess: self.NotifySuccess,
+            notifyErro: self.NotifyErro,
+            notifyInfo: self.NotifyInfo
         };
     };
     //$.fn.asyncRequest = new asyncRequest();
@@ -400,7 +444,7 @@
             notifyFunction: null,
             notifyCommandType: ['POST', 'PUT', 'DELETE'],
             notifyTemplate: "<div><div class='notificationTemplate'><p></p><p class='notificationTemplateMsg'>${msg}</p></div></div>",
-            notifyTemplateErro: "<div><div class='notificationTemplate'><p></p><p class='notificationTemplateMsg'>${msg}</p><br/><ul class='msgStack'><li><a onclick=\"$(this).parent().parent().find('li:last').toggle();\">${fullErroText}</a></li><li>${msgStack}</li></ul></div></div>",
+            notifyTemplateErro: "<div><div class='notificationTemplate'><p></p><p class='notificationTemplateMsg'>${msg}</p><ul class='msgStack'><li><a onclick=\"$(this).parent().parent().find('li:last').toggle();\">${fullErroText}</a></li><li>${msgStack}</li></ul></div></div>",
             notificationSuccessMsgDefault: 'Operação realizada com sucesso',
             notificationErrorMsgDefault: 'Ocorreu um erro ao realizar a operação',
             fullErroText: 'Erro Completo'
