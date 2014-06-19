@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>AsyncRequest</id>
-        <version>0.3.7</version>
+        <version>0.3.8</version>
         <title>AsyncRequest</title>
         <authors>Thiago Aguiar</authors>
         <owners>Thiago Aguiar</owners>
@@ -17,14 +17,14 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="Content\AsyncRequest-loading.gif" target="content\Content\AsyncRequest-loading.gif" />
-        <file src="Content\AsyncRequest.css" target="content\Content\AsyncRequest.css" />
-        <file src="Content\AsyncRequest.css" target="content\Content\AsyncRequest.min.css" />
-        <file src="Scripts\AsyncRequest.js" target="content\Scripts\AsyncRequest.js" />
-        <file src="Scripts\AsyncRequest.js" target="content\Scripts\AsyncRequest.min.js" />
-        <file src="Scripts\AsyncRequest.Notification.js" target="content\Scripts\AsyncRequest.Notification.js" />
-        <file src="Scripts\AsyncRequest.Notification.js" target="content\Scripts\AsyncRequest.Notification.min.js" />
-        <file src="Scripts\AsyncRequest.Queue.js" target="content\Scripts\AsyncRequest.Queue.js" />
-        <file src="Scripts\AsyncRequest.Queue.js" target="content\Scripts\AsyncRequest.Queue.min.js" />
+        <file src="content\Content\AsyncRequest-loading.gif" target="content\Content\AsyncRequest-loading.gif" />
+        <file src="content\Content\AsyncRequest.css" target="content\Content\AsyncRequest.css" />
+        <file src="content\Content\AsyncRequest.min.css" target="content\Content\AsyncRequest.min.css" />
+        <file src="content\Scripts\AsyncRequest.js" target="content\Scripts\AsyncRequest.js" />
+        <file src="content\Scripts\AsyncRequest.min.js" target="content\Scripts\AsyncRequest.min.js" />
+        <file src="content\Scripts\AsyncRequest.Notification.js" target="content\Scripts\AsyncRequest.Notification.js" />
+        <file src="content\Scripts\AsyncRequest.Notification.min.js" target="content\Scripts\AsyncRequest.Notification.min.js" />
+        <file src="content\Scripts\AsyncRequest.Queue.js" target="content\Scripts\AsyncRequest.Queue.js" />
+        <file src="content\Scripts\AsyncRequest.Queue.min.js" target="content\Scripts\AsyncRequest.Queue.min.js" />
     </files>
 </package>
