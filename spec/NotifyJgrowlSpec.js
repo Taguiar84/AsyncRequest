@@ -178,16 +178,53 @@ describe("Verifica notify Erro JSON - Jgrowl", function () {
 
 describe("Notify without Request", function () {
 
-    it('Success test', function () {
 
-        $.asyncRequest.notifySuccess('sucesso');
-        $.asyncRequest.notifyErro('erro');
-        $.asyncRequest.notifyErro('erro', 'stack');
-        $.asyncRequest.notifyInfo('info');
-
-        expect('sdfsd').toBe('Exception Messagestack trace');
-
+    beforeEach(function () {
+        $('.jGrowl-notification').trigger('jGrowl.close');//Remove ALL, now CALL erroFunction too
     });
 
+    it('Success test', function () {
+        runs(function () {
+            $.asyncRequest.notifySuccess('sucesso');
+        });
+        waits(500);
+        runs(function () {
+            var feedBack = $(".msgStack");//.hasclass('hidden'); //Stack
+            expect(feedBack.length).toBe(0);
+        });     
+    });
+
+    it('Erro test', function () {
+        runs(function () {
+            $.asyncRequest.notifyErro('erro');
+        });
+        waits(1000);
+        runs(function () {
+            var feedBack = $(".msgStack").hasClass('hidden'); //Stack
+            expect(feedBack).toBe(true);
+        });
+    });
+
+    it('Erro test with Stack', function () {
+        runs(function () {
+            $.asyncRequest.notifyErro('erro', 'stack');
+        });
+        waits(1000);
+        runs(function () {
+            var feedBack = $(".msgStack").hasClass('hidden');
+            expect(feedBack).toBe(false);
+        });
+    });
+
+    it('Info test', function () {
+        runs(function () {
+            $.asyncRequest.notifyInfo('info');
+        });
+        waits(1000);
+        runs(function () {
+            var feedBack = $(".msgStack");
+            expect(feedBack.length).toBe(0);
+        });
+    });
 
 });
