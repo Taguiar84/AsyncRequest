@@ -174,3 +174,20 @@ describe("Verifica notify Erro JSON - Jgrowl", function () {
         });
     });
 });
+
+
+describe("Notify without Request", function () {
+
+    it('Success test', function () {
+
+        $.asyncRequest.notifySuccess('sucesso');
+        $.asyncRequest.notifyErro('erro');
+        $.asyncRequest.notifyErro('erro', 'stack');
+        $.asyncRequest.notifyInfo('info');
+
+        expect('sdfsd').toBe('Exception Messagestack trace');
+
+    });
+
+
+});
