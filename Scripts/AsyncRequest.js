@@ -245,7 +245,7 @@
                         msg = jsonErro;
                     }
                     else {
-                        msg = jsonErro.errorMessage;
+                        msg = jsonErro.errorMessage || jsonErro.Message;
                         if (jsonErro.ExceptionMessage + ! null)
                             stack = jsonErro.ExceptionMessage;
                         if (jsonErro.StackTrace != null) {
