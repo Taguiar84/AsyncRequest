@@ -127,17 +127,21 @@
     <Content Include="Content\jasmine\jasmine_favicon.png" />
     <Content Include="Content\jquery.jgrowl.min.css" />
     <Content Include="Content\qunit-1.11.0.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="Index.min.html" />
     <Content Include="Global.asax" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\AsyncRequest.Notification.Toastr.js" />
+    <Content Include="Scripts\AsyncRequest.Notification.JGrowl.js" />
     <Content Include="Scripts\Globalization\AsyncRequest.en-US.js" />
     <Content Include="Scripts\Globalization\AsyncRequest.pt-BR.js" />
     <Content Include="Scripts\jasmine\jasmine-html.js" />
     <Content Include="Scripts\jasmine\jasmine.js" />
     <Content Include="Scripts\jasmine\MIT.LICENSE" />
-    <Content Include="Scripts\AsyncRequest.Notification.js" />
+    <Content Include="Scripts\AsyncRequest.Notification.Notify.js" />
     <Content Include="AsyncRequest.jquery.json" />
     <Content Include="README.md" />
     <Content Include="CONTRIBUTING.md" />
@@ -148,6 +152,8 @@
     <Content Include="Scripts\AsyncRequest.Queue.min.js.map">
       <DependentUpon>AsyncRequest.Queue.js</DependentUpon>
     </Content>
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Index.html" />
     <Content Include="Scripts\AsyncRequest.js" />
@@ -181,8 +187,11 @@
     <Content Include="Scripts\sinon-1.7.3.js" />
     <Content Include="Scripts\sinon-qunit-1.0.0.js" />
     <Content Include="Scripts\sinon-server-1.7.3.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="spec\AsyncRequestSpec.js" />
+    <Content Include="spec\NotifyToastrSpec.js" />
     <Content Include="spec\NotifyNotySpec.js" />
     <Content Include="spec\NotifyJgrowlSpec.js" />
     <Content Include="spec\QueueSpec.js" />
@@ -198,6 +207,7 @@
     <Content Include="Scripts\jquery-2.0.3.min.map" />
     <Content Include="Views\Jasmine\SpecRunner.cshtml" />
     <Content Include="Scripts\jquery.jgrowl.map" />
+    <Content Include="Scripts\toastr.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

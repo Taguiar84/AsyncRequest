@@ -7,10 +7,13 @@
 /// <reference path="jquery.linq.js" />
 /// <reference path="jQuery.tmpl.js" />
 /// <reference path="jasmine/jasmine.js" />
+/// <reference path="toastr.js" />
 
 /// <reference path="AsyncRequest.Object.js" />
 /// <reference path="AsyncDataServer.Queue.js" />
-/// <reference path="AsyncRequest.Notification.js" />
+/// <reference path="AsyncRequest.Notification.JGrowl.js" />
+/// <reference path="AsyncRequest.Notification.Notify.js" />
+/// <reference path="AsyncRequest.Notification.Toastr.js" />
 /// <reference path="AsyncRequest.js" />
 
 

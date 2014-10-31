@@ -8,6 +8,7 @@
     <link href="Content/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="Content/bootstrap/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="Content/jquery.jgrowl.min.css" rel="stylesheet" />
+    <link href="Content/toastr.css" rel="stylesheet" />
     <link href="Content/AsyncRequest.css" rel="stylesheet" />
 </head>
 <body>
@@ -46,6 +47,8 @@
     <!--<script src="Scripts/noty/layouts/top.js"></script>-->
     <script src="Scripts/noty/layouts/topRight.js"></script>
     <script src="Scripts/noty/themes/default.js"></script>
+    <script src="Scripts/toastr.js"></script>
+
 
     <!-- Test framework-->
     <!--<script src="Scripts/sinon-server-1.7.3.js"></script>
@@ -56,18 +59,21 @@
     <script src="Scripts/jasmine/jasmine-html.js"></script>
 
     <!-- System to test-->
-    <script src="Scripts/AsyncRequest.Queue.js"></script>
-    <script src="Scripts/AsyncRequest.Notification.js"></script>
+    <script src="Scripts/AsyncRequest.Queue.js"></script>    
     <script src="Scripts/AsyncRequest.js"></script>
+    <script src="Scripts/AsyncRequest.Notification.JGrowl.js"></script>
+    <script src="Scripts/AsyncRequest.Notification.Notify.js"></script>
+    <script src="Scripts/AsyncRequest.Notification.Toastr.js"></script>
     <!--<script src="Scripts/Globalization/AsyncRequest.en-US.js"></script>
     <script src="Scripts/Globalization/AsyncRequest.pt-BR.js"></script>-->
 
     <!-- Test files-->    
-    <script src="spec/AsyncRequestSpec.js"></script>
+    <!--<script src="spec/AsyncRequestSpec.js"></script>
     <script src="spec/VisualSpec.js"></script>
     <script src="spec/QueueSpec.js"></script>
     <script src="spec/NotifyJgrowlSpec.js"></script>
-    <script src="spec/NotifyNotySpec.js"></script>
+    <script src="spec/NotifyNotySpec.js"></script>-->
+    <script src="spec/NotifyToastrSpec.js"></script>
     <script>
 
         /*****************************************************************/
