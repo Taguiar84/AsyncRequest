@@ -233,12 +233,12 @@
             function (type, data, config) {
                 var notification = null,
                     msg, stack;
-                if ($.jGrowl !== null) {
+                if ($.jGrowl != null) {
                     notification = new $.fn.asyncRequest.Notification_JGrowl(config.notification);
-                } else if ($.noty !== null) {
+                } else if ($.noty != null) {
                     notification = new $.fn.asyncRequest.Notification_Notify(config.notification);
                 }
-                else if (toastr !== null) {
+                else if (toastr != null) {
                     notification = new $.fn.asyncRequest.Notification_Toastr(config.notification);
                 }
 
