@@ -248,7 +248,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>$(ProjectDir)GenerateMinification.exe $(ProjectDir)Scripts\AsyncRequest.js $(ProjectDir)Scripts\AsyncRequest.Notification.js $(ProjectDir)Scripts\AsyncRequest.Queue.js $(ProjectDir)Content\AsyncRequest.css</PostBuildEvent>
+    <PostBuildEvent>$(ProjectDir)GenerateMinification.exe $(ProjectDir)Scripts\AsyncRequest.js $(ProjectDir)Scripts\AsyncRequest.Notification.JGrowl.js $(ProjectDir)Scripts\AsyncRequest.Notification.Notify.js $(ProjectDir)Scripts\AsyncRequest.Notification.Toastr.js $(ProjectDir)Scripts\AsyncRequest.Queue.js $(ProjectDir)Content\AsyncRequest.css</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
