@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncRequest", "AsyncRequest.csproj", "{2C825A72-D655-4442-8EAF-C0DE3EC7C973}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateMinification", "Version\generateMinification\GenerateMinification.csproj", "{E314F7B2-6C0F-48D8-B3B0-D63EAB1389CD}"

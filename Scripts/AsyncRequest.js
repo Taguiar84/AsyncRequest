@@ -126,25 +126,25 @@
                         //        data.responseText = JSON.stringify(jsonRetorno);
                         //    }
                         //}
-
-                        //switch (request.statusCode().status) {
-                        //    //Core.HandlerErroInterno(data);
-                        //    //break;
-                        //    case 401: //Unauthorized
-                        //        Core.HandlerErroInterno(data);
-                        //        break;
-                        //    case 404: //Not found
-                        //        Core.HandlerErroInterno(data);
-                        //        break;
-                        //    case 500: //erro interno
-                        //        Core.HandlerErroInterno(data);
-                        //        break;
-                        //    case 400: //BadRequest
-                        //    default:
-                        //        asyncObject.ErrorFunction(data);
-                        //        ExecuteDynamicCommand();
-                        //        break
-                        //}
+                        //if(request)
+                        switch (data.status) {
+                            //Core.HandlerErroInterno(data);
+                            //break;
+                            case 401: //Unauthorized                                
+                                data.Message =  options.notification.notificationErrorMsgUnauthorized;
+                                break;
+                            //case 404: //Not found
+                            //    Core.HandlerErroInterno(data);
+                            //    break;
+                            //case 500: //erro interno
+                            //    Core.HandlerErroInterno(data);
+                            //    break;
+                            //case 400: //BadRequest
+                            //default:
+                            //    asyncObject.ErrorFunction(data);
+                            //    ExecuteDynamicCommand();
+                            //    break
+                        }
                         if (asyncObject.UnblockMoment === "before") {
                             var funcBefore = null;
                             if (funcErro !== null) {
@@ -450,6 +450,7 @@
             notifyTemplateErro: "<div><div class='notificationTemplate'><p></p><p class='notificationTemplateMsg'>${msg}</p><ul class='msgStack'><li><a onclick=\"$(this).parent().parent().find('li:last').toggle();\">${fullErroText}</a></li><li>${msgStack}</li></ul></div></div>",
             notificationSuccessMsgDefault: 'Operação realizada com sucesso',
             notificationErrorMsgDefault: 'Ocorreu um erro ao realizar a operação',
+            notificationErrorMsgUnauthorized: 'Acesso não autorizado',
             fullErroText: 'Erro Completo'
         }
     };

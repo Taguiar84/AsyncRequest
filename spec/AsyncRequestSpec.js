@@ -46,6 +46,15 @@ describe("AsyncRequest Request", function () {
         }
         $.asyncRequest.get(objRequest);
     });
+
+    it("Fazendo um request com Unauthorized", function () {
+        objRequest.ErroFunction = function (data) {
+            expect(data.Message).toBe($.asyncRequest.defaults.notification.notificationErrorMsgUnauthorized);
+        }
+        $.asyncRequest.get(objRequest);
+    });
+
+
     it("Testando o complete request", function () {
         var dados = 0;
         objRequest.SuccessFunction = function (data) {
